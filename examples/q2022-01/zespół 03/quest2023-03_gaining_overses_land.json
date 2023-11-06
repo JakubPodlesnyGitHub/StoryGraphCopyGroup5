@@ -1,0 +1,207 @@
+[{
+    "Title": "Disguise / Przebranie się",
+    "TitleGeneric": "Character’s feature change / Zmiana własności postaci",
+    "Description": "«Wanted_person», który jest ścigany listem gończym, zakłada wilcze skóry, aby zgubić pościg.",
+    "Override": 1,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "LokacjaA",
+          "Attributes": {},
+          "Characters": 
+          [
+              {
+                  "Id": "Wanted_person",
+                  "Attributes": {
+                    "IsWanted": true
+                  },
+                  "IsObject": true,
+                  "Characters": [],
+                  "Items": []
+                }
+            ],
+          "Items": []
+        },
+        {
+          "Name": "Prison",
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "unset",
+        "Attribute": "Wanted_person.IsWanted"
+      }
+    ]
+},
+{
+    "Title": "Escape from fight towards island / Ucieczka z walki na wyspę",
+    "TitleGeneric": "Location change / Zmiana lokacji",
+    "Description": "Jeden bohater («BohaterA») atakuje drugiego («BohaterB»), który ucieka na wyspę za pomocą tratwy.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "LokacjaA",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Id": "BohaterA",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            },
+            {
+              "Id": "BohaterB",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": [{
+                  "Name": "Boat"
+              }]
+            }
+          ],
+          "Items": [],
+          "Connections": [
+            {
+              "Destination": "Island"
+            }
+          ]
+        },
+        {
+          "Name": "Island",
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "BohaterB",
+        "To": "Island/Characters"
+      }
+    ]
+  },
+  {
+    "Title": "Exchanging item for item having prior knowledge / Wymiana przedmiotu na przedmiot posiadając wcześniejszą wiedzę",
+    "TitleGeneric": "Exchanging item for item / Wymiana przedmiotu na przedmiot",
+    "Description": "«BohaterA», który posiada pewien przedmiot («SomethingA»), i «BohaterB», który posiada inny przedmiot («Something_elseB»), wymieniają się tymi przedmiotami pod warunkiem, że «BohaterA» wie, że «BohaterB» może / chce się wymienić.",
+    "Override": 1,
+    "LSide": {
+        "Locations": [
+            {
+                "Id": "Somewhere",
+                "Attributes": {},
+                "Characters": [
+                    {
+                        "Id": "BohaterA",
+                        "IsObject": true,
+                        "Attributes": {},
+                        "Items": [
+                            {
+                                "Id": "SomethingA",
+                                "Attributes": {}
+                            }
+                        ],
+                        "Narration": [
+                            {
+                                "Id": "Some_Knowledge",
+                                "Attributes": {
+                                    "Knowledge": null
+                                },
+                                "Characters": [],
+                                "Items": []
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "BohaterB",
+                        "Attributes": {},
+                        "Characters": [],
+                        "Items": [
+                            {
+                                "Id": "Something_elseB",
+                                "Attributes": {}
+                            }
+                        ]
+                    }
+                ],
+                "Items": [],
+                "Connections": []
+            }
+        ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+        {
+            "Op": "move",
+            "Nodes": "SomethingA",
+            "To": "BohaterB/Items"
+        },
+        {
+            "Op": "move",
+            "Nodes": "Something_elseB",
+            "To": "BohaterA/Items"
+        }
+    ]
+},
+{
+    "Title": "Getting knowledge from conversation having safe conduct / Rozmowa z przekazaniem informacji posiadając glejt",
+    "TitleGeneric": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
+    "Description": "«CharacterA» przekazuje podczas rozmowy bohaterowi («CharacterB») wiedzę («Some_Knowledge») pod warunkiem posiadania glejtu.",
+    "Override": 1,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Somewhere",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Id": "CharacterA",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Narration": [
+                {
+                  "Id": "Some_Knowledge",
+                  "Attributes": {
+                    "Knowledge": null
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+              ]
+            },
+            {
+              "Id": "CharacterB",
+              "Attributes": {},
+              "Characters": [],
+              "Items": [
+                {
+                    "Name": "Safe_conduct",
+                    "Attributes": {}
+                }
+              ]
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "copy",
+        "To": "CharacterB/Narration",
+        "Nodes": "Some_Knowledge"
+      }
+    ]
+  }
+]

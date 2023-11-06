@@ -1,0 +1,509 @@
+[
+  {
+    "Title": "Using blackmail to get knowledge / Szatazowanie do zdobycia wiedzy",
+    "TitleGeneric": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
+    "Description": "Merchant przekazuje podczas rozmowy bohaterowi («BohaterA») wiedzę «NarrationA» zaszantażowany informacją Merchant_sells_illegal_potions.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Road",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Merchant",
+              "Narration": [
+                {
+                  "Id": "NarrationA",
+                  "Name": "Captains_whereabouts",
+                  "Attributes": {
+                    "Knowledge": null
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+              ]
+            },
+            {
+              "Id": "BohaterA",
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Narration": [
+                {
+                  "Name": "Merchant_sells_illegal_potions",
+                  "Attributes": {
+                    "Knowledge": null
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "copy",
+        "To": "BohaterA/Narration",
+        "Nodes": "NarrationA"
+      }
+    ]
+  },
+  {
+    "Title": "Conversation with giving money / Rozmowa z przekazaniem pieniędzy.",
+    "TitleGeneric": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
+    "Description": "Peasant przekazuje (Main_hero) wiedzę «NarrationA» i «NarrationB» wraz z zapłatą 2.",
+    "Override": 1,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Forest",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Peasant",
+              "IsObject": true,
+              "Narration": [
+                {
+                  "Id": "NarrationA",
+                  "Name": "Merchant_sells_illegal_potions",
+                  "Attributes": {
+                    "Knowledge": null
+                  },
+                  "Characters": [],
+                  "Items": []
+                },
+                {
+                  "Id": "NarrationB",
+                  "Name": "We_are_helping_peasant",
+                  "Attributes": {
+                    "Knowledge": null
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+              ],
+              "Attributes": {
+                "Money": null,
+                "GaveMoney": null
+              }
+            },
+            {
+              "Name": "Main_hero",
+              "Narration": [],
+              "Attributes": {
+                "Money": null
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [
+      {
+        "Cond": "Peasant.Money >= 2"
+      },
+      {
+        "Cond": "Peasant.GaveMoney == False"
+      }
+    ],
+    "Instructions": [
+      {
+        "Op": "copy",
+        "To": "Main_hero/Narration",
+        "Nodes": "NarrationA"
+      },
+      {
+        "Op": "copy",
+        "To": "Main_hero/Narration",
+        "Nodes": "NarrationB"
+      },
+      {
+        "Op": "set",
+        "Attribute": "Main_hero.Money",
+        "Expr": "Main_hero.Money + 2"
+      },
+      {
+        "Op": "set",
+        "Attribute": "Peasant.Money",
+        "Expr": "Peasant.Money - 2"
+      },
+      {
+        "Op": "set",
+        "Attribute": "Peasant.GaveMoney",
+        "Value": true
+      }
+    ]
+  },
+  {
+    "Title": "Bribery Merchant for a information / Przekupienie handlarza za informacje",
+    "TitleGeneric": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
+    "Description": "«BohaterA» przekupuje «BohaterB» w zamian za informacje o tym kto jest w więzieniu.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Somewhere",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Id": "BohaterA",
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {
+                "Money": null
+              }
+            },
+            {
+              "Id": "BohaterB",
+              "Name": "Merchant",
+              "Attributes": {
+                "Money": null
+              },
+              "Narration": [
+                {
+                  "Name": "Captains_whereabouts",
+                  "Attributes": {
+                    "Knowledge": null
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+              ],
+              "Characters": [],
+              "Items": []
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [
+      {
+        "Cond": "BohaterA.Money >= 20"
+      }
+    ],
+    "Instructions": [
+      {
+        "Op": "copy",
+        "To": "BohaterA/Narration",
+        "Nodes": "Captains_whereabouts"
+      },
+      {
+        "Op": "set",
+        "Attribute": "BohaterA.Money",
+        "Expr": "BohaterA.Money - 20"
+      },
+      {
+        "Op": "set",
+        "Attribute": "BohaterB.Money",
+        "Expr": "BohaterB.Money + 20"
+      }
+    ]
+  },
+  {
+    "Title": "Fight ending with Lumberjacks stun / Walka zakończona ogłuszeniem drwala",
+    "TitleGeneric": "Dropping item / Odłożenie przedmiotu",
+    "Description": "«BohaterA» atakuje Main_hero. «BohaterA» w wyniku walki zostaje ogłuszony i upuszcza swoje przedmioty.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Somewhere",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Id": "BohaterA",
+              "Name": "Lumberjack",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            },
+            {
+              "Name": "Main_hero",
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "BohaterA/Items/*",
+        "To": "Somewhere/Items"
+      },
+      {
+        "Op": "set",
+        "Attribute": "BohaterA.IsStunned",
+        "Value": true
+      }
+    ]
+  },
+  {
+    "Title": "Location change to Peasants_hut / Zmiana lokacji na Peasants_hut.",
+    "TitleGeneric": "Location change / Zmiana lokacji",
+    "Description": "«Bohater» idzie do Peasants_hut.",
+    "Override": 1,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Lokacja_A",
+          "Name": "Road",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Id": "Bohater",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            }
+          ],
+          "Items": [],
+          "Connections": [
+            {
+              "Destination": "Destination_location"
+            }
+          ]
+        },
+        {
+          "Id": "Destination_location",
+          "Name": "Peasants_hut"
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Bohater",
+        "To": "Destination_location/Characters"
+      },
+      {
+        "Op": "create",
+        "In": "Bohater/Narration",
+        "Sheaf": {
+          "Name": "Peasant_killed_sheep",
+          "Attributes": {
+            "Knowledge": "The sheep that Shepherd was looking for is dead and it is in Peasants_hut / Owca której poszukuje pasterz nie żyje, a jej zwłoki są w Peasants_hut"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "Title": "Trying to buy potion for peasant from Wizard / Próba kupna odtrutki dla chłopa od czarodzieja",
+    "TitleGeneric": "Item acquisition from another character / Przejęcie przedmiotu od innej postaci",
+    "Description": "«BohaterB» jest zaniepokojony stanem chłopa, ponieważ to jego dobry przyjaciel. Mówi nam, że z chęcią nam pomoże i oddaje nam jedną z buteleczek «ItemA». Dodatkowo daje nam «ItemB», aby otruć osobę która zrobiła to chłopu.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Somehere",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Id": "BohaterA",
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {
+                "Money": null
+              },
+              "Narration": [
+                {
+                  "Id": "NarrationA",
+                  "Name": "We_are_helping_peasant"
+                }
+              ]
+            },
+            {
+              "Id": "BohaterB",
+              "Name": "Wizard",
+              "Attributes": {},
+              "Characters": [],
+              "Items": [
+                {
+                  "Id": "ItemA",
+                  "Name": "Elixir",
+                  "Attributes": {}
+                },
+                {
+                  "Id": "ItemB",
+                  "Name": "Poison",
+                  "Attributes": {}
+                }
+              ]
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [
+      {
+        "Cond": "BohaterA.Money >= 2"
+      }
+    ],
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "ItemA",
+        "To": "BohaterA/Items"
+      },
+      {
+        "Op": "move",
+        "Nodes": "ItemB",
+        "To": "BohaterA/Items"
+      },
+      {
+        "Op": "delete",
+        "Nodes": "BohaterA/Narration/We_are_helping_peasant"
+      },
+      {
+        "Op": "set",
+        "Attribute": "BohaterA.Money",
+        "Expr": "BohaterA.Money - 2"
+      },
+      {
+        "Op": "set",
+        "Attribute": "BohaterB.Money",
+        "Expr": "BohaterB.Money + 2"
+      }
+    ]
+  },
+  {
+    "Title": "Passing knowledge to Shepard in exchange for information / Przekazanie wiedzy Shepard w zamian za informacje",
+    "TitleGeneric": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
+    "Description": "«BohaterA» przekazuje «BohaterB» wiedzę w zamian za informacje które obiecywał przekazać.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Somewhere",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Id": "BohaterA",
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {
+              },
+              "Narration": [
+                {
+                  "Id": "NarrationA",
+                  "Name": "Peasant_killed_sheep",
+                  "Attributes": {
+                    "Knowledge": null
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+              ]
+            },
+            {
+              "Id": "BohaterB",
+              "Name": "Shepherd",
+              "Attributes": {
+              },
+              "Characters": [],
+              "Items": [],
+              "Narration": [
+                {
+                  "Name": "Way_to_port"
+                }
+              ]
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "copy",
+        "To": "BohaterA/Narration",
+        "Nodes": "Way_to_port"
+      }
+    ]
+  },
+  {
+    "Title": "Peasant nutrition / Odtruwanie chłopa",
+    "TitleGeneric": "Turning an item into a character’s attribute / Przekształcenie przedmiotu w atrybut bohatera",
+    "Description": "«BohaterA» za pomocą «Something», odżywia «BohaterB».",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "LokacjaA",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Id": "BohaterA",
+              "Name": "Main_hero",
+              "Attributes": {},
+              "IsObject": true,
+              "Characters": [],
+              "Items": [
+                {
+                  "Id": "Something",
+                  "Name": "Elixir",
+                  "Attributes": {},
+                  "Characters": [],
+                  "Items": []
+                }
+              ]
+            },
+            {
+              "Id": "BohaterB",
+              "Name": "Peasant",
+              "Attributes": {
+                "IsIll": null
+              },
+              "IsObject": true,
+              "Characters": [],
+              "Items": [
+              ]
+            }
+          ],
+          "Items": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [
+      {
+        "Cond": "BohaterB.IsIll == True"
+      }
+    ],
+    "Instructions": [
+      {
+        "Op": "set",
+        "Attribute": "BohaterB.IsIll",
+        "Value": "False"
+      },
+      {
+        "Op": "delete",
+        "Nodes": "BohaterA/Items/Elixir"
+      }
+    ]
+  }
+]

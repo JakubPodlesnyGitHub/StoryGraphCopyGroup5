@@ -1,0 +1,58 @@
+[
+  {
+    "Title": "Card game / Gra w karty",
+    "TitleGeneric": "Character’s feature change / Zmiana własności postaci",
+    "Description": "Dwie postaci («PlayerA» i «PlayerB»), posiadajac karty lub korzystajac z kart udostępnionych przez kogoś w lokacji («Anywhere»), grają w karty zdobywając punkty.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Anywhere",
+          "Characters": [
+            {
+              "Id": "PlayerA",
+              "IsObject": true,
+              "Attributes": {}
+            },
+            {
+              "Id": "PlayerB",
+              "IsObject": true
+            }
+          ],
+          "Items": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [
+      {
+        "Count": "Anywhere/**/Items/Playing_cards",
+        "Min": 1
+    }
+
+    ],
+    "Instructions": [
+
+      {
+        "Op": "set",
+        "Attribute": "PlayerA.GameScore",
+        "Expr": "exec(\"import random\") or random.random()"
+      },
+      {
+        "Op": "set",
+        "Attribute": "PlayerB.GameScore",
+        "Expr": "exec(\"import random\") or random.random()"
+      }
+
+
+    ]
+  }
+]
+
+
+
+
+
+
+
+

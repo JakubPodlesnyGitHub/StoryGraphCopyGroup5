@@ -1,0 +1,586 @@
+[
+  {
+    "Title": "Try to kidnap daughter of prisoner governor / Próba porwania córki dyrektora więzienia",
+    "TitleGeneric": "Character’s feature change / Zmiana własności postaci",
+    "Description": "Kapitan statku próbuje porwać córkę dyrektora więzienia, w efekcie zostaje uznany za przestępcę.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Somewhere",
+          "Characters": [
+            {
+              "Name": "Ship_captain",
+              "IsObject": true,
+              "Attributes": {},
+              "Items": [],
+              "Characters": []
+            },
+            {
+              "Name": "Daughter",
+              "IsObject": false,
+              "Narration": [
+            {
+              "Name": "Is_Prison_Governor_Daughter",
+              "Attributes": {
+                "Knowledge": "The girl is the daughter of the prison director. / Dziewczyna jest córką dyrektora więzienia."
+              }
+            }],
+
+              "Attributes": {},
+              "Items": []
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "set",
+        "Attribute": "Ship_captain.IsWanted",
+        "Value": true
+      }
+    ]
+  },
+  {
+    "Title": "Persuade prisoners to rebel and escape / Przekonanie więźniów do buntu i ucieczki",
+    "TitleGeneric": "Character’s feature change / Zmiana własności postaci",
+    "Description": "Współwięźniowie zostaną przekonani do buntu i ucieczki.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Prison",
+          "Characters": [
+            {
+              "Name": "Prisoner",
+              "IsObject": false,
+              "Attributes": {},
+              "Items": [],
+              "Characters": []
+            },
+            {
+              "Name": "Main_hero",
+              "Attributes": {},
+              "IsObject": true,
+              "Items": []
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "set",
+        "Attribute": "Prisoner.Rebel",
+        "Value": true
+      },
+      {
+        "Op": "create",
+        "In": "Main_hero/Narration",
+        "Sheaf": {
+          "Name": "Rebel_knowledge",
+          "Attributes": {
+            "Knowledge": "Rebel that is about to be started by the prisoners"
+          }
+        }
+      }
+    ]
+  },
+ {
+    "Title": "Characters’ release from prison / Wypuszczenie bohaterów z więzienia",
+    "TitleGeneric": "Location change / Zmiana lokacji",
+    "Description": "Główny bohater i kapitan statku zostaje wypuszczony z więzienia do «Any_location» przez przedstawiciela władzy, «Any_guard», w zamian za wymienienie się informacją o nadchodzącym buncie. Dodatkowo bohatera uwiarygadnia glejt (Safe_conduct), odebrany mu przez «Any_guard» podczas aresztowania.",
+    "Override": 2,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Prison",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": false,
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            },
+            {
+              "Name": "Ship_captain",
+              "IsObject": false,
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            },
+            {
+              "Id": "Any_guard",
+              "IsObject": true,
+              "Attributes": {
+                "IsAuthority" : true
+              },
+              "Characters": [],
+              "Items": [{
+                  "Name": "Safe_conduct"
+              }],
+              "Narration": [
+                {
+                  "Id": "Rebel_knowledge",
+                  "Attributes": {
+                    "Knowledge": "Rebel that is about to be started by the prisoners"
+                  }
+                }
+              ]
+            }
+          ],
+          "Items": [],
+          "Connections": [
+            {
+              "Destination": "Any_location"
+            }
+          ]
+        },
+        {
+          "Id": "Any_location",
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Main_hero",
+        "To": "Any_location/Characters"
+      },
+      {
+          "Op": "move",
+          "Nodes": "Ship_captain",
+          "To": "Any_location/Characters"
+      },
+      {
+        "Op": "create",
+        "In": "Main_hero/Narration",
+        "Sheaf": {
+          "Name": "Prisoners_betrayal",
+          "Attributes": {
+            "Knowledge": "Więźniowie są wściekli za ujawnienie informacji o buncie.",
+            "Level": 1
+          }
+        }
+      },
+      {
+        "Op": "create",
+        "In": "Ship_captain/Narration",
+        "Sheaf": {
+          "Name": "Thankfulness",
+          "Attributes": {
+            "Knowledge": "Kapitan statku jest wdzięczny głównemu bohaterowi za uratowanie go z więzienia.",
+            "Level": 1
+          }
+        }
+      }
+    ]
+  },
+  {
+    "Title": "Prisoners revenge / Zemsta więźniów",
+    "TitleGeneric": "Character’s death / Śmierć bohatera",
+    "Description": "Więzień zabija głównego bohatera za wyjawienie informacji o nadchodzącym buncie.",
+    "Override": 2,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Prison",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": false,
+              "Narration": [
+                {
+                  "Name": "Prisoners_betrayal",
+                  "Attributes": {
+                    "Level": 1
+                  }
+                }
+              ],
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            },
+            {
+              "Name": "Prisoner",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [
+      {
+        "Cond": "Prisoners_betrayal.Level >= 1"
+      }
+    ],
+    "Instructions": [
+      {
+        "Op": "set",
+        "Attribute": "Main_hero.IsDead",
+        "Value": true
+      }
+    ]
+  },
+
+  {
+    "Title": "Sailing by boat / Wypłynięcie tratwą",
+    "TitleGeneric": "Location change / Zmiana lokacji",
+    "Description": "Główny bohater wypływa w morze na tratwie aby dotrzeć do Zamorskiej Krainy.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Port",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {},
+              "Items": [
+                {
+                  "Name": "Boat"
+                },
+                {
+                  "Name": "Compass"
+                },
+                {
+                  "Name": "Paddle"
+                }
+              ]
+            }
+          ],
+          "Items": [],
+          "Connections": [
+            {
+              "Destination": "Island"
+            }
+          ]
+        },
+        {
+          "Name": "Island"
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Main_hero",
+        "To": "Island/Characters"
+      }
+    ]
+  },
+  {
+    "Title": "Getting drunk with someone / Upicie się z kimś",
+    "TitleGeneric": "Getting drunk / Upicie się",
+    "Description": "Main_hero i «Someone» wykorzystują przedmiot (Alcohol), aby się wspólnie upić.",
+    "Override": 1,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "LokacjaA",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {
+                "HP": null
+              },
+              "Items": [
+                {
+                  "Name": "Alcohol",
+                  "Attributes": {
+                    "NutritionalValue": null
+                  }
+                }
+              ]
+            },
+            {
+              "Id": "Someone",
+              "Attributes": {
+                "HP": null
+              },
+              "Items": [
+
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "set",
+        "Attribute": "Main_hero.HP",
+        "Expr": "Main_hero.HP + Alcohol.NutritionalValue"
+      },
+      {
+        "Op": "set",
+        "Attribute": "Someone.HP",
+        "Expr": "Someone.HP + Alcohol.NutritionalValue"
+      },
+      {
+        "Op": "delete",
+        "Nodes": "Alcohol"
+      },
+      {
+        "Op": "set",
+        "Attribute": "Main_hero.IsDrunk",
+        "Value": true
+      },
+      {
+        "Op": "set",
+        "Attribute": "Someone.IsDrunk",
+        "Value": true
+      }
+    ]
+  },
+  {
+    "Title": "Getting knowledge about rebel from conversation / Rozmowa z przekazaniem informacji o buncie",
+    "TitleGeneric": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
+    "Description": "Main_hero przekazuje podczas rozmowy bohaterowi «CharacterB» wiedzę o «Rebel_knowledge».",
+    "Override": 1,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Prison",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": [],
+              "Narration": [
+                {
+                  "Id": "Rebel_knowledge",
+                  "Attributes": {
+                    "Knowledge": "Rebel that is about to be started by the prisoners"
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+              ]
+            },
+            {
+              "Id": "CharacterB",
+              "Attributes": {
+                "IsAuthority" : true
+              },
+              "Characters": [],
+              "Items": []
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "copy",
+        "To": "CharacterB/Narration",
+        "Nodes": "Rebel_knowledge"
+      }
+    ]
+  },
+
+  {
+    "Title": "Guard’s blackmail to get a safe conduct / Szantaż strażnika w celu zdobycia glejtu",
+    "TitleGeneric": "Item acquisition from another character / Przejęcie przedmiotu od innej postaci",
+    "Description": "Main_hero grozi, że wyjawi, że strażnik pił na służbie, jeśli ten nie przekaże mu glejtu.",
+    "Override": 1,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Tavern",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {}
+            },
+            {
+              "Name": "Guard",
+              "Characters": [],
+              "Items": [
+                {
+                  "Name": "Safe_conduct",
+                  "Attributes": {}
+                }
+              ]
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Safe_conduct",
+        "To": "Main_hero/Items"
+      }
+    ]
+  },
+  {
+    "Title": "Ship captain gives main hero ticket on the ship out of gratitude / Kapitan statku daje bohaterowi bilet na statek z wdzięczności",
+    "TitleGeneric": "Item acquisition from another character / Przejęcie przedmiotu od innej postaci",
+    "Description": "Kapitan statku wręcza bilet na statek bohaterowi, w zamian za uratowanie go z więzienia.",
+    "Override": 1,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Anywhere",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": false,
+              "Attributes": {}
+            },
+            {
+              "Name": "Ship_captain",
+              "IsObject": true,
+              "Items": [
+                {
+                  "Name": "Ticket",
+                  "Attributes": {}
+                }
+              ]
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Ticket",
+        "To": "Main_hero/Items"
+      }
+    ]
+  },
+   {
+      "Title":"Ship captain lets the main hero enter the ship out of gratitude / Kapitan statku wpuszcza głównego bohatera na statek z wdzięczności",
+      "TitleGeneric":"Location change / Zmiana lokacji",
+      "Description":"Kapitan statku wpuszcza głównego bohatera na statek z lokacji Port z wdzięczności.",
+      "Override":1,
+      "LSide":{
+         "Locations":[
+            {
+               "Name":"Port",
+               "Attributes":{
+
+               },
+               "Characters":[
+                  {
+                     "Name":"Main_hero",
+                     "IsObject": false,
+                     "Characters":[
+
+                     ],
+                     "Items":[
+
+                     ]
+                  },
+                  {
+                     "Name":"Ship_captain",
+                     "IsObject": true,
+                     "Items":[
+
+                     ],
+                     "Attributes":{
+
+                     },
+                     "Narration":[
+                        {
+                           "Name":"Thankfulness",
+                           "Attributes":{
+                              "Knowledge":"Kapitan statku jest wdzięczny głównemu bohaterowi za uratowanie go z więzienia."
+                           },
+                           "Characters":[
+
+                           ],
+                           "Items":[
+
+                           ]
+                        }
+                     ]
+                  }
+               ],
+               "Items":[
+
+               ],
+               "Connections":[
+                  {
+                     "Destination":"Ship"
+                  }
+               ]
+            },
+            {
+               "Name":"Ship"
+            }
+         ]
+      },
+      "RSide":{
+
+      },
+      "Preconditions":[
+
+      ],
+      "Instructions":[
+         {
+            "Op":"move",
+            "Nodes":"Main_hero",
+            "To":"Ship/Characters"
+         },
+        {
+            "Op":"move",
+            "Nodes":"Ship_captain",
+            "To":"Ship/Characters"
+         }
+      ]
+   }
+]
+
+
+
+
+
+
+
+

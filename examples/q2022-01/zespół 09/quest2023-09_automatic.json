@@ -1,0 +1,134 @@
+[
+  {
+    "Title": "Drunk captain’s death / Śmierć pijanego kapitana",
+    "TitleGeneric": "Character’s death / Śmierć bohatera",
+    "Description": "Kapitan statku potyka się o kawałek deski wystającej z podłogi i uderza głową w słup. Upadek powoduje wypadnięcie wszystkich przedmiotów.",
+    "Override": 1,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Island",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Ship_captain",
+              "Attributes": {
+                "IsDrunk": true
+              },
+              "Items": [
+                {
+                  "Name": "Wine"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "set",
+        "Attribute": "Ship_captain.IsDead",
+        "Value": true
+      },
+      {
+        "Op": "move",
+        "Nodes": "Ship_captain/Items/*",
+        "To": "Island/Items"
+      }
+    ]
+  },
+  {
+    "Title": "Captain is stealing the pelt from main hero / Kapitan kradnie futro od głównego bohatera",
+    "TitleGeneric": "Item acquisition from another character / Przejęcie przedmiotu od innej postaci",
+    "Description": "Kapitan zwęsza okazję na ukradnięcie cennych przedmiotów od głównego bohatera. Pierwszą, rzucającą się w oczy, rzeczą jest futro.",
+    "Override": 1,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Island",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Ship_captain",
+              "Attributes": {
+                "IsMiser": true
+              }
+            },
+            {
+              "Name": "Main_hero",
+              "Attributes": {},
+              "Characters": [],
+              "Items": [
+                {
+                  "Name": "Wolf_pelt"
+                },
+                {
+                  "Name": "Boat"
+                }
+              ]
+            }
+          ],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Wolf_pelt",
+        "To": "Ship_captain/Items"
+      },
+      {
+        "Op": "move",
+        "Nodes": "Boat",
+        "To": "Ship_captain/Items"
+      }
+    ]
+  },
+  {
+    "Title": "Turning a dead shark into a skin / Zamiana martwego rekina w skórę",
+    "TitleGeneric": "Turning a dead character into an item / Zamiana martwej postaci w przedmiot",
+    "Description": "Po morderczej walce na śmierć i życie rekin pada martwy. Po chwili odpoczynku możemy go oskórować.",
+    "Override": 1,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Island",
+          "Characters": [
+            {
+              "Name": "Shark",
+              "IsObject": true,
+              "Items": [],
+              "Attributes": {
+                "IsDead": true
+              }
+            }
+          ],
+          "Items": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "create",
+        "In": "Island/Items",
+        "Sheaf": {
+          "Name": "Shark_skin",
+          "Attributes": {
+            "Value": 1000
+          }
+        }
+      },
+      {
+        "Op": "delete",
+        "Nodes": "Shark"
+      }
+    ]
+  }
+]

@@ -1,0 +1,314 @@
+[
+   {
+      "Title":"Receive information about the location of the bandit / Otrzymanie informacji o miejscu pobytu bandyty",
+      "TitleGeneric":"Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
+      "Description":"W karczmie bohater dowiaduje się o kryjówce bandyty. Do kryjówki wymagany jest klucz, który został zgubiony na pastwisku.",
+      "Override":1,
+      "LSide":{
+         "Locations":[
+            {
+               "Name":"Inn",
+               "Characters":[
+                  {
+                     "Name":"Innkeeper_assistant",
+                     "IsObject":true,
+                     "Narration":[
+                        {
+                           "Name":"Shepherds_information",
+                           "Attributes":{
+                              "Knowledge":"There are rumours that the bandit is located in the shepherd's hideout. For the hideout we need a key. The shepherd, during a libation in the inn, confessed that the bandit is a friend of his and that he lost the key in the field. May encounter a fierce wolf there, which has recently appeared in the area. / Krążą pogłoski, że bandyta znajduję się w kryjówce pasterza. Do kryjówki potrzebujemy klucza. Pasterz podczas libacji w karczmie wygadał się, iż poszukiwany bandyta jest jego przyjacielem oraz że zgubił klucz w polu. Można tam napotkać groźnego wilka, który niedawno pojawił się w tamtych rejonach."
+                           }
+                        }
+                     ]
+                  },
+                  {
+                     "Name":"Main_hero",
+                     "IsObject":true,
+                     "Narration":[
+                        {
+                           "Name":"Quest_start_details",
+                           "Attributes":{
+                              "Knowledge":"Reward offer of 40 coins for finding or killing a killer in the area. / Oferta nagrody w wysokości 40 monet za znalezienie lub zabicie zabójcy w okolicy."
+                           }
+                        }
+                     ]
+                  }
+               ],
+               "Items":[
+                  
+               ],
+               "Connections":[
+                  
+               ]
+            }
+         ]
+      },
+      "RSide":{
+         
+      },
+      "Preconditions":[
+         {
+            "Count":"Main_hero/**/Items/Wanted_notice",
+            "Min":1
+         },
+         {
+            "Count":"Main_hero/**/Narration/Shepherds_information",
+            "Max":0
+         }
+      ],
+      "Instructions":[
+         {
+            "Op":"copy",
+            "To":"Main_hero/Narration",
+            "Nodes":"Shepherds_information"
+         }
+      ]
+   },
+   {
+      "Title":"Killing a bandit for robbery purposes / Zabicie bandyty w celach rabunkowych",
+      "TitleGeneric":"Fight ending with character’s death / Walka zakończona śmiercią uczestnika",
+      "Description":"Bohater podejmuję walke z bandytą.",
+      "Override":1,
+      "LSide":{
+         "Locations":[
+            {
+               "Name":"Shepherds_hideout",
+               "Attributes":{
+                  "IsPrivate":true
+               },
+               "Characters":[
+                  {
+                     "Name":"Main_hero",
+                     "IsObject":true,
+                     "Attributes":{
+                        "HP":null,
+                        "Money":null
+                     }
+                  },
+                  {
+                     "Name":"Bandit",
+                     "IsObject":true,
+                     "Attributes":{
+                        "HP":null,
+                        "Money":100
+                     },
+                     "Items":[
+                        {
+                           "Name":"Documents",
+                           "Narration":[
+                              {
+                                 "Name":"Document_about_bandit",
+                                 "Attributes":{
+                                    "Knowledge":"The documents contain a record of all the bandit's crimes, with which he can be identified. / Dokumenty zawierają zapis wszystkich zbrodni bandyty, z którymi można go identyfikować"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "Name":"Letter",
+                           "Narration":[
+                              {
+                                 "Name":"Letter_about_magic_compass",
+                                 "Attributes":{
+                                    "Knowledge":"The captain wants to exchange some items for the magic compass. / Kapitan chce wymienić za pewne przedmioty magiczny kompas."
+                                 }
+                              }
+                           ]
+                        }
+                     ]
+                  }
+               ],
+               "Items":[
+                  
+               ]
+            }
+         ]
+      },
+      "RSide":{
+         
+      },
+      "Preconditions":[
+         {
+            "Cond":"Main_hero.HP >= Bandit.HP"
+         }
+      ],
+      "Instructions":[
+         {
+            "Op":"set",
+            "Attribute":"Bandit.IsDead",
+            "Value":true
+         },
+         {
+            "Op":"set",
+            "Attribute":"Main_hero.HP",
+            "Expr":"Main_hero.HP - Bandit.HP / 2"
+         },
+         {
+            "Op":"set",
+            "Attribute":"Main_hero.Money",
+            "Expr":"Main_hero.Money + 100"
+         },
+         {
+            "Op":"move",
+            "Nodes":"Bandit/Items/*",
+            "To":"Main_hero/Items"
+         }
+      ]
+   },
+   {
+      "Title":"Agreement with the bandit / Dogadanie się z bandytą",
+      "TitleGeneric":"Item acquisition from another character / Przejęcie przedmiotu od innej postaci",
+      "Description":"Bohater dogaduje się z bandytą, który przekazuje mu list popełnionych zbrodni oraz pieniądze. List umożliwia identyfikację bandyty.",
+      "Override":0,
+      "LSide":{
+         "Locations":[
+            {
+               "Name":"Shepherds_hideout",
+               "Characters":[
+                  {
+                     "Name":"Main_hero",
+                     "IsObject":true,
+                     "Attributes":{
+                        "Money":null
+                     },
+                     "Narration":[
+                        {
+                           "Name":"Shepherds_information"
+                        }
+                     ]
+                  },
+                  {
+                     "Name":"Bandit",
+                     "IsObject":true,
+                     "Attributes":{
+                        "Money":100
+                     },
+                     "Items":[
+                        {
+                           "Name":"Documents",
+                           "Narration":[
+                              {
+                                 "Name":"Document_about_bandit",
+                                 "Attributes":{
+                                    "Knowledge":"The documents contain a record of all the bandit's crimes, with which he can be identified. / Dokumenty zawierają zapis wszystkich zbrodni bandyty, z którymi można go identyfikować"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "Name":"Letter",
+                           "Narration":[
+                              {
+                                 "Name":"Letter_about_magic_compass",
+                                 "Attributes":{
+                                    "Knowledge":"The captain wants to exchange some items for the magic compass. / Kapitan chce wymienić za pewne przedmioty magiczny kompas."
+                                 }
+                              }
+                           ]
+                        }
+                     ]
+                  }
+               ]
+            }
+         ]
+      },
+      "RSide":{
+         
+      },
+      "Preconditions":[
+         {
+            "Count":"Main_hero/**/Items/Keys",
+            "Min":1
+         },
+         {
+            "Count":"Main_hero/**/Items/Wanted_notice",
+            "Min":1
+         },
+         {
+            "Cond":"Bandit.Money > 40"
+         }
+      ],
+      "Instructions":[
+         {
+            "Op":"move",
+            "Nodes":"Documents",
+            "To":"Main_hero/Items"
+         },
+         {
+            "Op":"move",
+            "Nodes":"Letter",
+            "To":"Main_hero/Items"
+         },
+         {
+            "Op":"set",
+            "Attribute":"Main_hero.Money",
+            "Expr":"Main_hero.Money + 40"
+         },
+         {
+            "Op":"set",
+            "Attribute":"Bandit.Money",
+            "Expr":"Bandit.Money - 40"
+         }
+      ]
+   },
+   {
+      "Title":"Receiving the award / Otrzymanie nagrody",
+      "TitleGeneric":"Item acquisition from another character / Przejęcie przedmiotu od innej postaci",
+      "Description":"Bohater otrzymuje nagrodę za zrealizowanie zadania z listu gończego.",
+      "Override":1,
+      "LSide":{
+         "Locations":[
+            {
+               "Name":"Town_hall",
+               "Attributes":{
+                  
+               },
+               "Characters":[
+                  {
+                     "Name":"Guard",
+                     "IsObject":true,
+                     "Attributes":{
+                        "Money":40
+                     }
+                  },
+                  {
+                     "Name":"Main_hero",
+                     "Attributes":{
+                        "Money":null
+                     },
+                     "Characters":[
+                        
+                     ],
+                     "Items":[
+                        {
+                           "Name":"Documents"
+                        }
+                     ]
+                  }
+               ],
+               "Items":[
+                  
+               ],
+               "Connections":[
+                  
+               ]
+            }
+         ]
+      },
+      "RSide":{
+         
+      },
+      "Instructions":[
+         {
+            "Op":"set",
+            "Attribute":"Main_hero.Money",
+            "Expr":"Main_hero.Money + 40"
+         },
+         {
+            "Op":"move",
+            "Nodes":"Documents",
+            "To":"Guard/Items"
+         }
+      ]
+   }
+]

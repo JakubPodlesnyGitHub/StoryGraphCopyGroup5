@@ -1,0 +1,52 @@
+[
+  {
+    "Title": "Winning card game and getting opponent belongings / Wygranie w karty i zdobycie przedmiotów przeciwnika",
+    "TitleGeneric":"Character’s feature loss / Utrata własności postaci",
+    "Description": "Rozgrywkę w karty wygrał «Winner», który przejmuje wszystkie przedmioty tego, kto przegrał («Looser»).",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Anywhere",
+          "Characters": [
+            {
+              "Id": "Winner",
+              "Attributes": {
+                "GameScore" : null
+              }
+            },
+            {
+              "Id": "Looser",
+              "Attributes": {
+                "GameScore" : null
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [
+      {
+        "Cond": "Winner.GameScore > Looser.GameScore"
+      }
+    ],
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Looser/Items/*",
+        "To": "Winner/Items"
+      },
+      {
+        "Op": "unset",
+        "Attribute": "Winner.GameScore"
+      },
+      {
+        "Op": "unset",
+        "Attribute": "Looser.GameScore"
+      }
+
+    ]
+  }
+]
+

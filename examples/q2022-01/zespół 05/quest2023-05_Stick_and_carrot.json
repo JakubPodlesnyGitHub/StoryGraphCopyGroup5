@@ -1,0 +1,600 @@
+﻿[
+  {
+    "Title": "Making a deal with pirate captain for rum delivery / Zawarcie umowy z kapitanem piratów na dostawę rumu",
+    "TitleGeneric": "",
+    "Description": "Główny bohater (Main_hero) zobowiązuje się dostarczyć piratom (Pirate_captain) 2 beczki rumu, otrzymuje zadatek w wysokości 250 monet.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Pirate_ship",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {
+                "Money": null
+              },
+              "Items": []
+            },
+            {
+              "Name": "Pirate_captain",
+              "IsObject": true,
+              "Attributes": {
+                "Money": null
+              },
+              "Items": []
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "set",
+        "Attribute": "Main_hero.Money",
+        "Expr": "Main_hero.Money + 250"
+      },
+      {
+        "Op": "set",
+        "Attribute": "Pirate_captain.Money",
+        "Expr": "Pirate_captain.Money - 250"
+      }
+    ]
+  },
+  {
+    "Title": "Poison an item without losing poison / Zatrucie przedmiotu bez utraty trucizny",
+    "TitleGeneric": "Item’s feature change / Zmiana własności przedmiotu",
+    "Comment": "Przekształcenie przedmiotu w atrybut innego przedmiotu",
+    "Description": "Użycie trucizny («Any_poison») do zamiany innego przedmiotu («Other_item») w truciznę.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Somewhere",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Id": "BohaterA",
+              "IsObject": true,
+              "Attributes": {},
+              "Items": [
+                {
+                  "Id": "Any_poison",
+                  "Attributes": {
+                    "IsPoison": true
+                  }
+                }
+              ]
+            }
+          ],
+          "Items": [
+            {
+              "Id": "Other_item"
+            }
+          ],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "set",
+        "Attribute": "Other_item.IsPoison",
+        "Value": true
+      }
+    ]
+  },
+  {
+    "Title": "Making a deal with the prison_governor / Zawarcie umowy z kapitanem strażników",
+    "TitleGeneric": "Item acquisition from another character / Przejęcie przedmiotu od innej postaci",
+    "Description": "Główny bohater (Main_hero) zawiera umowę z kapitanem straży więzienia (Prison_governor) w ratuszu (Town_hall), zobowiązując się do znalezienia sposobu na pozbycie się piratów z portu (Port), a w zamian otrzymuje umowę z kapitanem strażników (Contract) oraz glejt (Safe_conduct), nie będzie poszukiwany przez władze, uzyska pomoc w uwolnieniu kapitana statku cywilnego.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Town_hall",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            },
+            {
+              "Name": "Prison_governor",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": [
+                {
+                  "Name": "Contract",
+                  "Attributes": {}
+                },
+                {
+                  "Name": "Safe_conduct",
+                  "Attributes": {}
+                }
+              ]
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Contract",
+        "To": "Main_hero/Items"
+      },
+      {
+        "Op": "move",
+        "Nodes": "Safe_conduct",
+        "To": "Main_hero/Items"
+      },
+      {
+        "Op": "set",
+        "Attribute": "Main_hero.IsWanted",
+        "Value": false
+      }
+    ]
+  },
+  {
+    "Title": "Fight ending with character’s escape and loss / Walka zakończona ucieczką z utratą przedmiotu i zdrowia",
+    "TitleGeneric": "Location change / Zmiana lokacji",
+    "Description": "Jeden bohater («BohaterA») atakuje drugiego («BohaterB»), który ucieka do sąsiedniej lokacji («LokacjaB»), tracąc swoją broń (Sword) i połowę punktów zdrowia w wyniku obrażeń podczas walki.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "LokacjaA",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Id": "BohaterA",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            },
+            {
+              "Id": "BohaterB",
+              "IsObject": true,
+              "Attributes": { "HP": null },
+              "Characters": [],
+              "Items": [ { "Name": "Sword" } ]
+            }
+          ],
+          "Items": [],
+          "Connections": [
+            {
+              "Destination": "LokacjaB"
+            }
+          ]
+        },
+        {
+          "Id": "LokacjaB",
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Sword",
+        "To": "LokacjaA/Items"
+      },
+      {
+        "Op": "set",
+        "Attribute": "BohaterB.HP",
+        "Expr": "BohaterB.HP / 2"
+      },
+      {
+        "Op": "move",
+        "Nodes": "BohaterB",
+        "To": "LokacjaB/Characters"
+      }
+    ]
+  },
+  {
+    "Title": "Helping the Captain escape from the prison using Contract / Pomoc Kapitanowi w ucieczce z więzienia posiadając umowę z kapitanem strażników",
+    "TitleGeneric": "Location change / Zmiana lokacji",
+    "Description": "Główny bohater (Main_hero) pomaga kapitanu (Ship_captain) w ucieczce z więzienia (Prison) do lokacji (Ship) posidając klucze (Keys) i umowę (Contract) od kapitana strażników.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Prison",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": [
+                {
+                  "Name": "Keys",
+                  "Attributes": {},
+                  "Characters": [],
+                  "Items": []
+                },
+                {
+                  "Name": "Contract",
+                  "Attributes": {},
+                  "Characters": [],
+                  "Items": []
+                }
+              ]
+            },
+            {
+              "Name": "Ship_captain",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            }
+          ],
+          "Items": [],
+          "Connections": [
+            {
+              "Destination": "Neighbour_location"
+            }
+          ]
+        },
+        {
+          "Id": "Neighbour_location",
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Main_hero",
+        "To": "Neighbour_location/Characters"
+      },
+      {
+        "Op": "move",
+        "Nodes": "Ship_captain",
+        "To": "Neighbour_location/Characters"
+      },
+      {
+        "Op": "delete",
+        "Nodes": "Contract"
+      }
+    ]
+  },
+  {
+    "Title": "Item transfer / Przekazanie przedmiotu",
+    "TitleGeneric": "Item acquisition from another character / Przejęcie przedmiotu od innej postaci",
+    "Description": "«Giver» przekazuje przedmiot «Any_item» postaci «Receiver» bezpłatnie.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Somewhere",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Id": "Giver",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": [
+                {
+                  "Id": "Any_item",
+                  "Attributes": {},
+                  "Characters": [],
+                  "Items": []
+                }
+              ]
+            },
+            {
+              "Id": "Receiver",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Any_item",
+        "To": "Receiver/Items"
+      }
+    ]
+  },
+  {
+    "Title": "Agreement for transport / Umowa na przewóz",
+    "TitleGeneric": "",
+    "Description": "Główny bohater (Main_hero) i (Pirate_captain) zawierają umowę, na mocy której (Pirate_captain) zobowiązuje się przewieźć (Main_hero) statkiem pirackim z lokacji (Pirate_ship) do wybranej lokacji.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Pirate_ship",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Pirate_captain",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            },
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+
+    ]
+  },
+  {
+    "Title": "Releasing the main character from prison if he has a contract with the captain of the guards / Uwolnienie głównego bohatera z więzienia w przypadku posiadania umowy z kapitanem strażników",
+    "TitleGeneric": "Location change / Zmiana lokacji",
+    "Description": "Jeśli Główny bohater (Main_hero) posiada umowę z kapitanem strażników (Contract), to zostanie natychmiast wypuszczony z więzienia. W innym przypadku Główny bohater zostanie w więzieniu.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Prison",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": [
+                {
+                  "Name": "Contract"
+                }
+              ]
+            }
+          ],
+          "Items": [],
+          "Connections": [
+            {
+              "Destination": "Any_location"
+            }
+          ]
+        },
+        {
+          "Id": "Any_location",
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [
+      {
+        "Count": "Prison/Characters/Prison_guard",
+        "Min": 1
+      }
+    ],
+    "Instructions": [
+      {
+        "Op": "set",
+        "Attribute": "Main_hero.IsWanted",
+        "Value": false
+      },
+      {
+        "Op": "move",
+        "Nodes": "Main_hero",
+        "To": "Any_location/Characters"
+      }
+    ]
+  },
+  {
+    "Title": "Rum tasting on the Pirate ship / Degustacja rumu na pokładzie statku pirackiego",
+    "TitleGeneric": "",
+    "Description": "Kapitan piratów (Pirate_captain) każe bohaterowi (Main_hero) spróbować rum z beczki na pokładzie statku pirackiego (Pirate_ship).",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Pirate_ship",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            },
+            {
+              "Name": "Pirate_captain",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+
+    ]
+  },
+  {
+    "Title": "Stealing an item from a sick character at location / Kradzież przedmiotu u chorej postaci z lokacji",
+    "TitleGeneric": "Item acquisition from another character / Przejęcie przedmiotu od innej postaci",
+    "Description": "«Bohater» dokonuje kradzieży przedmiotu («Any_item») u chorej postaci («Any_character») z przestrzeni («Somewhere»). Czy warto było narażać chorego?",
+    "Comment": "Postać chora, łatwa ofiara",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Somewhere",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Id": "Any_character",
+              "IsObject": true,
+              "Attributes": {
+                "IsIll": true
+              },
+              "Items": [
+                {
+                  "Id": "Any_item"
+                }
+              ]
+            },
+            {
+              "Id": "Bohater",
+              "IsObject": true,
+              "Attributes": {},
+              "Items": []
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Any_item",
+        "To": "Bohater/Items"
+      }
+    ]
+  },
+  {
+    "Title": "Get tips from pirates / Otrzymanie napiwku od piratów",
+    "TitleGeneric": "",
+    "Description": "Główny bohater (Main_hero) otzrymuje od piratów (Pirate_captain) jako nagrodę za dostarczenie rumu 50 monet.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Pirate_ship",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {
+                "Money": null
+              }
+            },
+            {
+              "Name": "Pirate_captain",
+              "IsObject": true,
+              "Attributes": {
+                "Money": null
+              }
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "set",
+        "Attribute": "Main_hero.Money",
+        "Expr": "Main_hero.Money + 50"
+      },
+      {
+        "Op": "set",
+        "Attribute": "Pirate_captain.Money",
+        "Expr": "Pirate_captain.Money - 50"
+      }
+    ]
+  },
+  {
+    "Title": "Get a reward from mayor / Otrzymanie nagrody od wójta",
+    "TitleGeneric": "",
+    "Description": "Główny bohater (Main_hero) otzrymuje z rąk kapitana strażników (Prison_governor) nagrodę od wójta za pozbycie się piratów w wysokości 200 monet.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Town_hall",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {
+                "Money": null
+              }
+            },
+            {
+              "Name": "Prison_governor",
+              "IsObject": true,
+              "Attributes": {
+                "Money": null
+              }
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "set",
+        "Attribute": "Main_hero.Money",
+        "Expr": "Main_hero.Money + 200"
+      },
+      {
+        "Op": "set",
+        "Attribute": "Prison_governor.Money",
+        "Expr": "Prison_governor.Money - 200"
+      }
+    ]
+  }
+]

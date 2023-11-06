@@ -1,0 +1,274 @@
+[
+  {
+    "Title": "Getting knowledge from conversation about captains meeting place / Rozmowa z przekazaniem informacji o miejscu spotkania kapitanów",
+    "TitleGeneric": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
+    "Description": "Wchodząc do tawerny, poszukiwacze przygód bardzo się wyróżniają. Nie inaczej jest teraz, gdy mamy przepasany u naszej torby piękną skórę wilka. Nie jest to oczywiście ciężko zauważyć, wobec czego podchodzi do nas kelner i przekazuje nam podczas rozmowy plotkę na temat aktualnego miejsca pobytu kapitanów.",
+    "Override": 1,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Tavern",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Innkeeper_assistant",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": [],
+              "Narration": [
+                {
+                  "Name": "Captains_meeting_place",
+                  "Attributes": {
+                    "Knowledge": "This inn is often visited by captains who are able to help you get to the island / W tej karczmie często przebywają kapitanowie, którzy są w stanie pomóc przedostać się na wyspę"
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+              ]
+            },
+            {
+              "Name": "Main_hero",
+              "Attributes": {},
+              "Characters": [],
+              "Items": [
+                {
+                  "Name": "Wolf_pelt"
+                }
+              ]
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "copy",
+        "To": "Main_hero/Narration",
+        "Nodes": "Captains_meeting_place"
+      }
+    ]
+  },
+  {
+    "Title": "Entering the ship with compass belonging to the captain / Wejście na statek z kompasem należącym do kapitana",
+    "TitleGeneric": "Teleportation / Teleportacja",
+    "Description": "Dzięki kompasowi z wygrawerowaną nazwą statku możemy dostać się bez problemu na statek.",
+    "Override": 1,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Island",
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Characters": [],
+              "Items": [
+                {
+                  "Name": "Compass",
+                  "Narration": [
+                    {
+                      "Name": "Captain_compass_history",
+                      "Attributes": {
+                        "Knowledge": "The compass belonged to the captain and has the ship's name engraved on it. / Kompas należał do kapitana i posiada wygrawerowaną nazwę statku."
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        },
+        {
+          "Name": "Ship"
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Main_hero",
+        "To": "Ship/Characters"
+      }
+    ]
+  },
+  {
+    "Title": "Joining the drunk captain to main hero / Dołączenie pijanego kapitana do głównego bohatera",
+    "TitleGeneric": "Overwhelming character / Przejęcie kontroli nad postacią",
+    "Description": "Kapitan omamiony alkoholem a zarazem żądny przygód chce się do nas dołączyć w naszej wyprawie.",
+    "Override": 1,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Tavern",
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Items": [
+                {
+                  "Name": "Wine"
+                }
+              ],
+              "Narration": [
+                {
+                  "Name": "Captains_meeting_place"
+                }
+              ]
+            },
+            {
+              "Name": "Ship_captain",
+              "Attributes": {
+                "IsDrunk": true
+              },
+              "Items": [
+                {
+                  "Name": "Boat"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Wine",
+        "To": "Ship_captain/Items"
+      },
+      {
+        "Op": "move",
+        "Nodes": "Boat",
+        "To": "Main_hero/Items"
+      },
+      {
+        "Op": "move",
+        "Nodes": "Ship_captain",
+        "To": "Main_hero/Characters"
+      }
+    ]
+  },
+  {
+    "Title": "Joining the miser captain to main hero / Dołączenie chciwego kapitana do głównego bohatera",
+    "TitleGeneric": "Overwhelming character / Przejęcie kontroli nad postacią",
+    "Description": "Chęć zysku ciężko jest przezwyciężyć. Z tego też względu chciwy kapitan dołącza do głownego bohatera z nadzieją na dobrą okazję.",
+    "Override": 1,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Tavern",
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Items": [
+                {
+                  "Name": "Bag",
+                  "Attributes": {
+                    "IsFullOfDocuments": true
+                  }
+                }
+              ],
+              "Narration": [
+                {
+                  "Name": "Captains_meeting_place"
+                }
+              ]
+            },
+            {
+              "Name": "Ship_captain",
+              "Attributes": {
+                "IsMiser": true
+              },
+              "Items": [
+                {
+                  "Name": "Boat"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Bag",
+        "To": "Ship_captain/Items"
+      },
+      {
+        "Op": "move",
+        "Nodes": "Ship_captain",
+        "To": "Main_hero/Characters"
+      },
+      {
+        "Op": "move",
+        "Nodes": "Boat",
+        "To": "Main_hero/Items"
+      }
+    ]
+  },
+  {
+    "Title": "Exchanging Wolf pelt for an ship ticket / Wymiana skóry wilka na bilet",
+    "TitleGeneric": "Exchanging item for item / Wymiana przedmiotu na przedmiot",
+    "Description": "Ta skóra wilka jest naprawdę wiele warta. Być może starczy na wymianę za bilet do zamorskiej krainy?",
+    "Override": 1,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Market",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Items": [
+                {
+                  "Name": "Wolf_pelt"
+                }
+              ],
+              "Narration": [
+                {
+                  "Name": "Captains_meeting_place"
+                }
+              ]
+            },
+            {
+              "Name": "Merchant",
+              "Items": [
+                {
+                  "Name": "Ship_ticket"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Wolf_pelt",
+        "To": "Merchant/Items"
+      },
+      {
+        "Op": "move",
+        "Nodes": "Ship_ticket",
+        "To": "Main_hero/Items"
+      }
+    ]
+  }
+]

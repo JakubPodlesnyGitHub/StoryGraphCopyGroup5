@@ -1,0 +1,50 @@
+[
+  {
+    "Title": "Shepard death after sheep death - test / Uśmiercanie pasterza po śmierci owcy",
+    "TitleGeneric": "Character’s death / Śmierć bohatera",
+    "Description": "Testowa.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Somewhere",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Shepherd",
+              "Attributes": {
+              },
+              "Narration": [
+              ]
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Mutton_chop",
+              "Attributes": {
+              }
+            }
+
+          ],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [
+
+    ],
+    "Instructions": [
+      {
+        "Op": "set",
+        "Attribute": "Shepherd.IsDead",
+        "Value": true
+      },
+      {
+        "Op": "move",
+        "Nodes": "Shepherd/Items/*",
+        "To": "Somewhere/Items"
+      }
+    ]
+  }
+]

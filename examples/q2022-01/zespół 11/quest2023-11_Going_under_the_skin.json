@@ -1,0 +1,357 @@
+[
+    {
+      "Title": "A note was read about trade with captain / Przeczytano notatkę o wymianie z kapitanem",
+      "TitleGeneric": "Getting knowledge from item / Pozyskanie wiedzy z przedmiotu",
+      "Description": "Pozyskujemy informacje, że kapitan jest w posiadaniu magicznego kompasu, potrzebnego do zdobycia cennego przedmiotu.",
+      "Override": 0,
+      "LSide": {
+        "Locations": [
+          {
+            "Id": "Somewhere",
+            "Attributes": {},
+            "Characters": [
+              {
+                "Name": "Main_hero",
+                "IsObject": true,
+                "Items": [
+                  {
+                    "Name": "Letter",
+                    "Attributes": {},
+                    "Characters": [],
+                    "Items": [],
+                    "Narration": [
+                      {
+                        "Name": "Captain_location_knowledge",
+                        "Attributes": {
+                          "Knowledge": "The captain wants to exchange some items for the magic compass. / Kapitan chce wymienić za pewne przedmioty magiczny kompas."
+                        },
+                        "Characters": [],
+                        "Items": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "Connections": []
+          }
+        ]
+      },
+      "RSide": {},
+      "Preconditions": [
+        {
+          "Count": "Main_hero/Narration/Captain_location_knowledge",
+          "Max": 0
+        }
+      ],
+      "Instructions": [
+        {
+          "Op": "copy",
+          "To": "Main_hero/Narration",
+          "Nodes": "Captain_location_knowledge"
+        }
+      ]
+    },
+    {
+        "Title": "Talking with the captain about trading pelt for compass / Rozmowa z kapitanem na temat wymiany skóry za kompas",
+        "TitleGeneric": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
+        "Description": "Kapitan przekazuje podczas rozmowy bohaterowi informację, że odda kompas za skóry owcze.",
+        "Override": 0,
+        "LSide": {
+          "Locations": [
+            {
+              "Name": "Port",
+              "Attributes": {},
+              "Characters": [
+                {
+                  "Name": "Main_hero",
+                  "IsObject": true,
+                  "Attributes": {},
+                  "Characters": [],
+                  "Items": [],
+                  "Narration": [
+                    {
+                      "Name": "Captain_location_knowledge",
+                      "Attributes": {
+                        "Knowledge": "The captain wants to exchange some items for the magic compass. / Kapitan chce wymienić za pewne przedmioty magiczny kompas."
+                      },
+                      "Characters": [],
+                      "Items": []
+                    }
+                  ]
+                },
+                {
+                  "Name": "Ship_captain",
+                  "Attributes": {},
+                  "Characters": [],
+                  "Items": [],
+                  "Narration": [
+                    {
+                      "Name": "Captain_trade_knowledge",
+                      "Attributes": {
+                        "Knowledge": "The captain will exchange the compass for sheepskins. / Kapitan wymieni kompas za skóry owcze."
+                      },
+                      "Characters": [],
+                      "Items": []
+                    }
+                  ]
+                }
+              ],
+              "Items": [],
+              "Connections": []
+            }
+          ]
+        },
+        "RSide": {},
+        "Preconditions": [
+          {
+            "Count": "Main_hero/Narration/Captain_trade_knowledge",
+            "Max": 0
+          }
+      ],
+        "Instructions": [
+          {
+            "Op": "copy",
+            "To": "Main_hero/Narration",
+            "Nodes": "Captain_trade_knowledge"
+          }
+        ]
+      },
+  {
+    "Title": "Fetching the sheep / Zwabienie owcy",
+    "TitleGeneric": "Location change / Zmiana lokacji",
+    "Description": "Główny bohater zwabia owce do lasu.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Pasture",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Items": [
+                {
+                  "Name": "Herbs",
+                  "Attributes": {}
+                }
+              ],
+              "Attributes": {
+              }
+    
+            },
+            {
+              "Name": "Sheep",
+              "Attributes": {
+              }
+    
+            }
+          ],
+          "Items": [],
+          "Connections": [
+            {
+              "Destination": "Forest"
+            }
+          ]
+        },
+        {
+          "Name": "Forest"
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Main_hero",
+        "To": "Forest/Characters"
+      },
+      {
+        "Op": "move",
+        "Nodes": "Sheep",
+        "To": "Forest/Characters"
+      }
+    ]
+  },
+  {
+    "Title": "Exchanging sheep_pelt for compass with captain / Wymiana skóry owcy za kompas z kapitanem",
+    "TitleGeneric": "Exchanging item for item / Wymiana przedmiotu na przedmiot",
+    "Description": "Główny bohater który posiada skórę owczą wymienia się z kapitanem na kompas.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Port",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {},
+              "Items": [
+                {
+                  "Name": "Sheep_pelt",
+                  "Attributes": {}
+                }
+              ],
+              "Narration": [
+                {
+                  "Name": "Captain_trade_knowledge",
+                  "Attributes": {
+                    "Knowledge": "The captain will exchange the compass for sheepskins. / Kapitan wymieni kompas za skóry owcze."
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+              ]
+            },
+            {
+              "Name": "Ship_captain",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": [
+                {
+                  "Name": "Compass",
+                  "Attributes": {}
+                }
+              ]
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Sheep_pelt",
+        "To": "Ship_captain/Items"
+      },
+      {
+        "Op": "move",
+        "Nodes": "Compass",
+        "To": "Main_hero/Items"
+      }
+    ]
+  },
+  {
+    "Title": "Exchanging compass for cactus with wizard / Wymiana kompas za kaktus z czarodziejem",
+    "TitleGeneric": "Exchanging item for item / Wymiana przedmiotu na przedmiot",
+    "Description": "Główny bohater który posiada kompass wymienia się z magiem na bezcenny argentyński kaktus.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Wizards_hut",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {},
+              "Items": [
+                {
+                  "Name": "Compass",
+                  "Attributes": {}
+                }
+              ]
+            },
+            {
+              "Name": "Wizard",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": [
+                {
+                  "Name": "Priceless_argentinian_cactus",
+                  "Attributes": {}
+                }
+              ]
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Compass",
+        "To": "Wizard/Items"
+      },
+      {
+        "Op": "move",
+        "Nodes": "Priceless_argentinian_cactus",
+        "To": "Main_hero/Items"
+      }
+    ]
+  },
+  {
+    "Title": "Getting caught by a lumberjack and notifying the guards / Przyłapanie przez drwala i powiadomienie strażników",
+    "TitleGeneric": "Character’s feature change / Zmiana własności postaci",
+    "Description": "Bohater zostaje przyłapany na zbrodni, staje się poszukiwany przez władze.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Pasture",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "Attributes": {},
+              "IsObject": true,
+              "Items": []
+            },
+            {
+              "Name": "Lumberjack",
+              "Attributes": {},
+              "Items": []
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Corpse"
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Town_hall"
+            }
+          ]
+        },
+        {
+          "Name": "Town_hall"
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [
+      {
+        "Count": "Pasture/Characters/Shepherd",
+        "Max": 0
+      }
+    ],
+    "Instructions": [
+      {
+        "Op": "set",
+        "Attribute": "Main_hero.IsWanted",
+        "Value": true
+      },
+      {
+        "Op": "move",
+        "Nodes": "Lumberjack",
+        "To": "Town_hall/Characters"
+      }
+
+    ]
+  }
+]

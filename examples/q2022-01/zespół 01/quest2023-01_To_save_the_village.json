@@ -1,0 +1,588 @@
+[
+  {
+    "Title": "Getting knowledge from dead Peasant’s corpse / Pozyskanie wiedzy z ciała wieśniaka",
+    "TitleGeneric": "Getting knowledge from item / Pozyskanie wiedzy z przedmiotu",
+    "Description": "Main_hero natyka się na ciało wieśniaka (Corpse_of_peasant) zawierający informację o tym, że został on zabity przez wilki (Death_by_wolf_tusk).",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Abandoned_village",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": []
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Corpse_of_peasant",
+              "Attributes": {},
+              "Characters": [],
+              "Items": [],
+              "Narration": [
+                {
+                  "Name": "Death_by_wolf_tusk",
+                  "Attributes": {
+                    "Knowledge": "Po zbadaniu zwłok dochodzisz do wniosku, że to wilki zaatakowały wieśniaka. Wilki nie powinny pojawiać się tak blisko wioski. Widocznie brakuje pożywienia w lesie i przez to terroryzują wioskę."
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+              ]
+            }
+          ],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "copy",
+        "To": "Main_hero/Narration",
+        "Nodes": "Death_by_wolf_tusk"
+      }
+    ]
+  },
+  {
+    "Title": "Getting knowledge about wizard’s demands / Poznanie żądań czarodzieja",
+    "TitleGeneric": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
+    "Description": "Wizard przekazuje podczas rozmowy bohaterowi (Main_hero) wiedzę o żądaniach czarodzieja (Wizard_demands).",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Wizards_hut",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Wizard",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": [],
+              "Narration": [
+                {
+                  "Name": "Wizard_demands",
+                  "Attributes": {
+                    "Knowledge": "Od czarodzieja dowiadujesz się, że właściciel tawerny ukradł od maga recepturę na niezwykle uzależniające ALE. Czarownik chce się odegrać na gospodarzu. Jeśli mu pomożesz, dostaniesz od niego radę, jak poradzić sobie z watahą"
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+              ]
+            },
+            {
+              "Name": "Main_hero",
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "copy",
+        "To": "Main_hero/Narration",
+        "Nodes": "Wizard_demands"
+      }
+    ]
+  },
+  {
+    "Title": "Getting knowledge from Poison_bomb_recipe / Pozyskanie wiedzy z Poison_bomb_recipe",
+    "TitleGeneric": "Getting knowledge from item / Pozyskanie wiedzy z przedmiotu",
+    "Description": "Main_hero ma prezpis na bombę trującą (Poison_bomb_recipe) zawierający informację jak stworzyć bombę trującą na wilka (Poison_bomb_creation).",
+    "Override": 1,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Somewhere",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": []
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Poison_bomb_recipe",
+              "Attributes": {},
+              "Characters": [],
+              "Items": [],
+              "Narration": [
+                {
+                  "Name": "Poison_bomb_creation",
+                  "Attributes": {
+                    "Knowledge": "Aby stworzyć bombę trującą potrzebujesz zatrutych ziół, siarki i żywicy. Najpierw wymieszaj roztarte zioła z żywicą tworząc truciznę, a potem domieszaj siarkę i utwórz kule."
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+              ]
+            }
+          ],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "copy",
+        "To": "Main_hero/Narration",
+        "Nodes": "Poison_bomb_creation"
+      }
+    ]
+  },
+  {
+    "Title": "Fight ending with Wizard’s escape and losing the poison bomb recipt / Walka zakończona ucieczką czarownika i zgubieniem przez niego przepisu na bombę trującą",
+    "TitleGeneric": "Fight ending with character’s escape / Walka zakończona ucieczką uczestnika",
+    "Description": "Main_hero atakuje czarodzieja (Wizard), ponieważ chce zdobyć przepis na bombę trującą. Czarodziej ucieka do sąsiedniej lokacji («Somewhere») i gubi przepis na bombę.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Wizards_hut",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": [],
+              "Narration": [
+                {
+                  "Name": "Wizard_demands",
+                  "Attributes": {},
+                  "Characters": [],
+                  "Items": []
+                }
+              ]
+            },
+            {
+              "Name": "Wizard",
+              "Attributes": {},
+              "Characters": [],
+              "Items": [
+                {
+                  "Name": "Poison_bomb_recipe",
+                  "Attributes": {}
+                }
+              ]
+            }
+          ],
+          "Items": [],
+          "Connections": [
+            {
+              "Destination": "Somewhere"
+            }
+          ]
+        },
+        {
+          "Id": "Somewhere",
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Poison_bomb_recipe",
+        "To": "Wizards_hut/Items"
+      },
+      {
+        "Op": "move",
+        "Nodes": "Wizard",
+        "To": "Somewhere/Characters"
+      }
+    ]
+  },
+  {
+    "Title": "Blackmailing the wizard and getting poison bomb recipe by force / Zaszantażowanie czarownika i wydobycie siłą przepisu na bomby trujące",
+    "TitleGeneric": "Item acquisition from another character / Przejęcie przedmiotu od innej postaci",
+    "Description": "Główny bohater zauważa, że czarownik boi się pająków i szantażuje go, że jeżeli nie odda mu przepisu na bombę to rzuci mu jednego na głowę. Czarownik ulega szantażowi. Zostaje wystawiony list gończy za głównym bohaterem.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Wizards_hut",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {},
+              "Narration": [
+                {
+                  "Name": "Wizard_demands",
+                  "Attributes": {},
+                  "Characters": [],
+                  "Items": []
+                }
+              ]
+            },
+            {
+              "Name": "Wizard",
+              "Attributes": {},
+              "Items": [
+                {
+                  "Name": "Poison_bomb_recipe",
+                  "Attributes": {}
+                }
+              ]
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "set",
+        "Attribute": "Main_hero.IsWanted",
+        "Value": true
+      },
+      {
+        "Op": "move",
+        "Nodes": "Poison_bomb_recipe",
+        "To": "Wizards_hut/Items"
+      }
+    ]
+  },
+  {
+    "Title": "Innkeeper called out by main hero change location to Tavern / Karczmarz zawołany przez głównego bohatera przechodzi do tawerny",
+    "TitleGeneric": "Location change / Zmiana lokacji",
+    "Description": "Karczmarz zawołany przez głównego bohatera przechodzi do tawerny (Tavern).",
+    "Override": 1,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Tavern_backroom",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Innkeeper",
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            },
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            }
+          ],
+          "Items": [],
+          "Connections": [
+            {
+              "Destination": "Tavern"
+            }
+          ]
+        },
+        {
+          "Name": "Tavern",
+          "Attributes": {},
+          "Characters": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Innkeeper",
+        "To": "Tavern/Characters"
+      }
+    ]
+  },
+  {
+    "Title": "Poisoning wolf / Otrucie wilka",
+    "TitleGeneric": "Character’s death / Śmierć bohatera",
+    "Description": "Po rzuceniu bomby trującej do jaskini wilk traci 4/5 HP.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Cave",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Wolf",
+              "Attributes": {
+                "HP": null
+              },
+              "Characters": [],
+              "Items": []
+            },
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": [
+                {
+                  "Name": "Poison_bomb"
+                }
+              ]
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "set",
+        "Attribute": "Wolf.HP",
+        "Expr": "Wolf.HP/5"
+      },
+      {
+        "Op": "delete",
+        "Nodes": "Poison_bomb"
+      }
+    ]
+  },
+  {
+    "Title": "Creating poison bomb / Wytworzenie bomby trującej",
+    "TitleGeneric": "Creating an item using knowledge / Stworzenie przedmiotu z wiedzy fabularnej",
+    "Description": "Główny bohater (Main_hero) tworzy bombę trującą (Poison_bomb) dzięki posiadanej wiedzy fabularnej (Poison_bomb_creation).",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Somewhere",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Items": [
+                {
+                  "Name": "Herbs",
+                  "Attributes": {
+                    "IsPoison": true,
+                    "Value": null
+                  }
+                },
+                {
+                  "Name": "Resin",
+                  "Attributes": {}
+                },
+                {
+                  "Name": "Sulfur",
+                  "Attributes": {}
+                }
+              ],
+              "Narration": [
+                {
+                  "Name": "Poison_bomb_creation"
+                }
+              ]
+            }
+          ],
+          "Items": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "delete",
+        "Nodes": "Poison_bomb_creation"
+      },
+      {
+        "Op": "create",
+        "In": "Main_hero/Items",
+        "Sheaf": {
+          "Name": "Poison_bomb"
+        }
+      },
+      {
+        "Op": "delete",
+        "Nodes": "Resin"
+      },
+      {
+        "Op": "delete",
+        "Nodes": "Sulfur"
+      },
+      {
+        "Op": "set",
+        "Attribute": "Herbs.Value",
+        "Expr": "Herbs.Value/2"
+      }
+    ]
+  },
+  {
+    "Title": "Making a exchange with wizard / Wymiana z czarownikiem",
+    "TitleGeneric": "Exchanging item for item / Wymiana przedmiotu na przedmiot",
+    "Description": "Główny bohater (Main_hero) daje czarownikowi (Wizard) przedmiot (Coin), a w zamian otrzymuje (Poison_bomb_recipe).",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Wizards_hut",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {},
+              "Items": [
+                {
+                  "Name": "Coin",
+                  "Attributes": {}
+                }
+              ]
+            },
+            {
+              "Name": "Wizard",
+              "IsObject": true,
+              "Attributes": {},
+              "Items": [
+                {
+                  "Name": "Poison_bomb_recipe",
+                  "Attributes": {}
+                },
+                {
+                  "Name": "Herbs",
+                  "Attributes": {
+                    "IsPoison": true
+                  }
+                },
+                {
+                  "Name": "Resin",
+                  "Attributes": {}
+                },
+                {
+                  "Name": "Sulfur",
+                  "Attributes": {}
+                }
+              ]
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Coin",
+        "To": "Wizard/Items"
+      },
+      {
+        "Op": "move",
+        "Nodes": "Poison_bomb_recipe",
+        "To": "Main_hero/Items"
+      },
+      {
+        "Op": "move",
+        "Nodes": "Resin",
+        "To": "Main_hero/Items"
+      },
+      {
+        "Op": "move",
+        "Nodes": "Herbs",
+        "To": "Main_hero/Items"
+      },
+      {
+        "Op": "move",
+        "Nodes": "Sulfur",
+        "To": "Main_hero/Items"
+      }
+    ]
+  },
+  {
+    "Title": "Collecting a reward from Peasant / Odebranie nagrody od wieśniaka",
+    "TitleGeneric": "Exchanging item for item / Wymiana przedmiotu na przedmiot",
+    "Description": "Główny bohater (Main_hero) dostaje od wieśniaka (Peasant) przedmiot (Elixir) i pewną sumę pieniędzy - 20.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Peasants_hut",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {
+                "Money": null
+              },
+              "Items": [
+                {
+                  "Name": "Wolf_pelt",
+                  "Attributes": {}
+                }
+              ]
+            },
+            {
+              "Name": "Peasant",
+              "Attributes": {
+                "Money": null
+              },
+              "Items": [
+                {
+                  "Name": "Elixir",
+                  "Attributes": {}
+                }
+              ]
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [
+      {
+        "Cond": "Peasant.Money >= 20"
+      }
+    ],
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Elixir",
+        "To": "Main_hero/Items"
+      },
+      {
+        "Op": "set",
+        "Attribute": "Peasant.Money",
+        "Expr": "Peasant.Money - 20"
+      },
+      {
+        "Op": "set",
+        "Attribute": "Main_hero.Money",
+        "Expr": "Main_hero.Money + 20"
+      }
+    ]
+  }
+]

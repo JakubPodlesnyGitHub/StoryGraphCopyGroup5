@@ -1,0 +1,56 @@
+[
+    {
+       "Title": "A / B",
+       "TitleGeneric":"",
+       "Description": "A.",
+       "Override": 0,
+       "LSide": {
+          "Locations": [
+             {
+                "Name": "Pirate_ship",
+                "Attributes": {
+
+                },
+                "Characters":[
+                   {
+                      "Name":"Main_hero",
+                      "IsObject":true,
+                      "Attributes":{
+                         "Money":null
+                      },
+                      "Items":[
+
+                      ]
+                   },
+                   {
+                      "Name":"Pirate_captain",
+                      "IsObject":true,
+                      "Attributes":{
+                         "Money":null
+                      },
+                      "Items":[
+
+                      ]
+                   }
+                ],
+                "Items":[
+
+                ],
+                "Connections":[
+
+                ]
+             }
+          ]
+       },
+       "RSide":{},
+       "Instructions": [
+          {
+        "Op": "set",
+        "Attribute": "Main_hero.Money",
+        "Expr": "Main_hero.Money + 200"
+      }
+       ]
+    }
+ ]
+
+ 

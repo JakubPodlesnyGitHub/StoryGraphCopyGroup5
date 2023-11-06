@@ -1,0 +1,58 @@
+[{
+    "Title": "Getting knowledge about Triss potion / Rozmowa z przekazaniem informacji o miksturze dla Triss",
+    "TitleGeneric": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
+    "Description": "«CharacterA» przekazuje podczas rozmowy bohaterowi («CharacterB») wiedzę o składnikach mikstury.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Somewhere",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Id": "CharacterA",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": [],
+              "Narration": [
+                {
+                  "Name": "Shopping_list",
+                  "Attributes": {
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+              ]
+            },
+            {
+              "Id": "CharacterB",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": [],
+              "Narration": [
+                                {
+                                    "Name": "Triss_wounded",
+                                    "Attributes": {
+
+                                    }
+                                }
+                            ]
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "copy",
+        "To": "CharacterB/Narration",
+        "Nodes": "Shopping_list"
+      }
+    ]
+  }]

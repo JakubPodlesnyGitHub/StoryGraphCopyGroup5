@@ -1,0 +1,53 @@
+[
+  {
+    "Title": "Getting knowledge from possessed item / Pozyskanie wiedzy z posidanego przedmiotu",
+    "TitleGeneric": "",
+    "Description": "«CharacterA» posiada przedmiot («Medium») zawierający informację («Some_Knowledge») i poznaje ją.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Somewhere",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Id": "CharacterA",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": [
+                {
+                  "Id": "Medium",
+                  "Attributes": {},
+                  "Characters": [],
+                  "Items": [],
+                  "Narration": [
+                    {
+                      "Id": "Some_Knowledge",
+                      "Attributes": {
+                        "Knowledge": null
+                      },
+                      "Characters": [],
+                      "Items": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Comment": "Nie da się dodać zastrzeżenia o duplikatach bez odwołania do nazwy",
+    "Instructions": [
+      {
+        "Op": "copy",
+        "To": "CharacterA/Narration",
+        "Nodes": "Some_Knowledge"
+      }
+    ]
+  }
+]

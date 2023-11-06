@@ -1,0 +1,279 @@
+[
+  {
+    "Title": "World Greece in fumes / Świat Grecja w oparach",
+    "TitleGeneric": "",
+    "Description": "Swiat, w którym może wydarzyć się misja Grecja w oparach.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Histroli_village",
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "Attributes": {
+                "GearPoints": 2,
+                "Money": 10
+              }
+            },
+            {
+              "Name": "Andronik",
+              "Narration": [
+                {
+                  "Id": "Knowledge_of_drought",
+                  "Name": "Knowledge_of_drought",
+                  "Attributes": {
+                    "Knowledge": "Nad całą Grecję nadciągnęło widmo suszy. Dostawy Pyrinas zostały wstrzymane i wszystkie parowe maszyny wkrótce staną."
+                  },
+                  "Characters": [],
+                  "Items": []
+                },
+                {
+                  "Id": "Knowledge_of_daedalus",
+                  "Name": "Knowledge_of_daedalus",
+                  "Attributes": {
+                    "Knowledge": "Daedalus żyje w centrum okolicznego Labiryntu. Jest genialnym wynalazcą, który współpracował z wieloma bogami i może wiedzieć, co się dzieje."
+                  },
+                  "Characters": [],
+                  "Items": []
+                },
+                {
+                  "Id": "First_suspicions",
+                  "Name": "First_suspicions",
+                  "Attributes": {
+                    "Knowledge": "Andornika myśli, że bogowie odwrócili się od ludzkości."
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+              ]
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Maze_1"
+            }
+          ]
+        },
+        {
+          "Id": "Maze_1",
+          "Connections": [
+            {
+              "Destination": "Maze_2"
+            },
+            {
+              "Destination": "Maze_3"
+            },
+            {
+              "Destination": "Maze_4"
+            }
+          ]
+        },
+        {
+          "Id": "Maze_2",
+          "Items": [
+            {
+              "Name": "Gears"
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Maze_1"
+            },
+            {
+              "Destination": "Maze_6"
+            },
+            {
+              "Destination": "Maze_5"
+            },
+            {
+              "Destination": "Maze_7"
+            }
+          ]
+        },
+        {
+          "Id": "Maze_3",
+          "Connections": [
+            {
+              "Destination": "Maze_1"
+            },
+            {
+              "Destination": "Maze_6"
+            }
+          ]
+        },
+        {
+          "Id": "Maze_4",
+          "Characters": [
+            {
+              "Name": "Harpy",
+              "Items": [
+                {
+                  "Name": "Pyrinas"
+                }
+              ]
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Maze_1"
+            },
+            {
+              "Destination": "Maze_5"
+            }
+          ]
+        },
+        {
+          "Id": "Maze_5",
+          "Items": [
+            {
+              "Name": "Gears"
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Maze_2"
+            },
+            {
+              "Destination": "Maze_4"
+            }
+          ]
+        },
+        {
+          "Id": "Maze_6",
+          "Items": [
+            {
+              "Name": "Vase"
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Maze_2"
+            },
+            {
+              "Destination": "Maze_3"
+            }
+          ]
+        },
+        {
+          "Id": "Maze_7",
+          "Connections": [
+            {
+              "Destination": "Maze_2"
+            },
+            {
+              "Destination": "Maze_8"
+            },
+            {
+              "Destination": "Maze_9"
+            },
+            {
+              "Destination": "Maze_10"
+            }
+          ]
+        },
+        {
+          "Id": "Maze_8",
+          "Items": [
+            {
+              "Name": "Gears"
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Maze_7"
+            },
+            {
+              "Destination": "Maze_9"
+            }
+          ]
+        },
+        {
+          "Id": "Maze_9",
+          "Connections": [
+            {
+              "Destination": "Maze_7"
+            },
+            {
+              "Destination": "Maze_8"
+            }
+          ]
+        },
+        {
+          "Id": "Maze_10",
+          "Characters": [
+            {
+              "Name": "Minotaur"
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Maze_7"
+            },
+            {
+              "Destination": "Maze_centre"
+            }
+          ]
+        },
+        {
+          "Name": "Maze_centre",
+          "Characters": [
+            {
+              "Name": "Daedalus",
+              "Items": [
+                {
+                  "Name": "Daedalus_wings"
+                }
+              ],
+              "Narration": [
+                {
+                  "Id": "Knowledge_of_missing_gods",
+                  "Name": "Knowledge_of_missing_gods",
+                  "Attributes": {
+                    "Knowledge": "Hefajstos, Posejdon i Promoteusz zaginęli. Bez nich cała technologia parowa przepadnie."
+                  },
+                  "Characters": [],
+                  "Items": []
+                },
+                {
+                  "Id": "Knowledge_of_hephaestus",
+                  "Name": "Knowledge_of_hephaestus",
+                  "Attributes": {
+                    "Knowledge": "Kuźnia Hefajstosa znajduje się w wulkanie Etna."
+                  },
+                  "Characters": [],
+                  "Items": []
+                },
+                {
+                  "Id": "Knowledge_of_poseidon",
+                  "Name": "Knowledge_of_poseidon",
+                  "Attributes": {
+                    "Knowledge": "Pałac Posejdona znajduje się obecnie w Jeziorze Limini."
+                  },
+                  "Characters": [],
+                  "Items": []
+                },
+                {
+                  "Id": "Knowledge_of_prometheus",
+                  "Name": "Knowledge_of_prometheus",
+                  "Attributes": {
+                    "Knowledge": "Promoteusz żyje pośród ludzi ze swym bratem i bratową, Pandorą, w wiosce Cymefa."
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+              ]
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": ""
+            }
+          ]
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": []
+  }
+]

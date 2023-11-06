@@ -1,0 +1,196 @@
+[
+  {
+  "Title": "Collect password_plate / Podniesienie tabliczki z hasłem",
+  "TitleGeneric": "Picking item up / Podniesienie przedmiotu",
+  "Description": "Nil podnosi tabliczkę z hasłem, dzięki temu będzie mógł otworzyć drzwi",
+  "Override": 0,
+  "LSide": {
+    "Locations": [
+      {
+        "Name": "Room_1",
+        "Attributes": {},
+        "Characters": [
+          {
+            "Name": "Nil",
+            "IsObject": true,
+            "Attributes": {},
+            "Characters": [],
+            "Items": []
+          }
+        ],
+        "Items": [
+          {
+            "Name": "Password_plate",
+            "Attributes": {},
+            "Characters": [],
+            "Items": []
+          }
+        ]
+      }
+    ]
+  },
+  "RSide": {},
+  "Instructions": [
+    {
+      "Op": "move",
+      "Nodes": "Password_plate",
+      "To": "Nil/Items"
+    },
+    {
+        "Op": "create",
+        "In": "Nil/Narration",
+        "Sheaf": {
+          "Name": "Password",
+          "Attributes": {
+            "Knowledge": "Nil zna hasło do terminalu Reptilian",
+            "Level": 1
+          }
+        }
+      }
+  ]
+},
+  {
+  "Title": "Block picking item / Blokada podniesienia przedmiotu",
+  "TitleGeneric": "Picking item up / Podniesienie przedmiotu",
+  "Description": "«Bohater» podnosi przedmiot («Something») leżący w lokacji.",
+  "Override": 2,
+  "LSide": {
+    "Locations": [
+      {
+        "Id": "Room_1",
+        "Attributes": {},
+        "Characters": [
+          {
+            "Name": "Nil",
+            "IsObject": true,
+            "Attributes": {},
+            "Characters": [],
+            "Items": []
+          }
+        ],
+        "Items": [
+          {
+            "Name": "Terminal",
+            "Attributes": {},
+            "Characters": [],
+            "Items": []
+          }
+        ]
+      }
+    ]
+  },
+    "RSide": {},
+    "Preconditions": [
+      {
+        "Cond": "Password.Level >= 1"
+      }
+    ],
+    "Instructions": [
+{
+        "Op": "create",
+        "In": "Nil/Narration",
+        "Sheaf": {
+          "Name": "Terminal_Open",
+          "Attributes": {
+            "Knowledge": "Hasło wpisane poprawnie",
+            "Level": 1
+          }
+        }
+      }
+    ]
+},
+{
+  "Title": "Escaping from operating room in Laboratory  / Ucieczka z pokoju operacyjnego w laboratorium",
+  "TitleGeneric": "Location change / Zmiana lokacji",
+  "Description": "Nil wychodzi na korytarz laboratorium po wpisaniu prawidłowego hasła w terminal",
+  "Override": 1,
+  "LSide": {
+    "Locations": [
+      {
+        "Name": "Room_1",
+        "Attributes": {},
+        "Characters": [
+          {
+            "Name": "Nil",
+            "IsObject": true,
+            "Characters": []
+          }
+        ],
+        "Items": [],
+        "Connections": [
+          {
+            "Destination": "111"
+          }
+        ]
+      },
+      {
+        "Name": "Corridor_lab"
+      }
+    ]
+  },
+  "RSide": {},
+    "Preconditions": [
+      {
+        "Cond": "Terminal_Open.Level >= 1"
+      }
+    ],
+  "Instructions": [
+    {
+      "Op": "move",
+      "Nodes": "Nil",
+      "To": "111/Characters"
+    }
+  ]
+},
+  {
+  "Title": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
+  "TitleGeneric": "",
+  "Description": "«CharacterA» przekazuje podczas rozmowy bohaterowi («CharacterB») wiedzę («Some_Knowledge»).",
+  "Override": 0,
+  "LSide": {
+    "Locations": [
+      {
+        "Id": "111",
+        "Attributes": {},
+        "Characters": [
+          {
+            "Name": "Nil",
+            "IsObject": true,
+            "Attributes": {},
+            "Characters": [
+                        {
+                        "Name": "Sssylva",
+                        "Attributes": {},
+                        "Characters": [],
+                        "Items": []
+                        }
+            ],
+            "Items": [],
+            "Narration": [
+              {
+                "Id": "CorrectRoom_13",
+                "Attributes": {
+                  "Knowledge": null
+                },
+                "Characters": [],
+                "Items": []
+              }
+            ]
+          }
+        ],
+        "Items": [],
+        "Connections": []
+      }
+    ]
+  },
+  "RSide": {},
+  "Preconditions": [],
+  "Instructions": [
+    {
+      "Op": "copy",
+      "To": "Sssylva/Narration",
+      "Nodes": "CorrectRoom_13"
+    }
+  ]
+}
+]

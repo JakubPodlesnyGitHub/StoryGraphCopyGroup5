@@ -1,0 +1,156 @@
+[
+  {
+    "Title": "Arson location / Podpalenie lokacji",
+    "TitleGeneric": "",
+    "Description": "«Bohater» podpala lokacje «Somewhere» co powoduje spalenie wszystkich przedmiotów w lokacji.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Somewhere",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Id": "Bohater",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": [
+                {
+                  "Id": "SomethingLit",
+                  "Attributes": {
+                    "IsLit": true
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "delete",
+        "Nodes": "Somewhere/Items/*"
+      }
+    ]
+  },
+    {
+        "Title": "Pulling character out / Wyciągnięcie postaci",
+        "TitleGeneric": "",
+        "Description": "«BohaterA» wyciąga («BohaterB») z innego (otwartego) przedmiotu («Opakowanie»).",
+        "Override": 0,
+        "LSide": {
+          "Locations": [
+            {
+              "Id": "Somewhere",
+              "Attributes": {},
+              "Characters": [
+                {
+                  "Id": "BohaterA",
+                  "IsObject": true,
+                  "Attributes": {},
+                  "Characters": [],
+                  "Items": []
+                }
+              ],
+              "Items": [
+                {
+                  "Id": "Opakowanie",
+                  "Attributes": {
+                    "IsClosed": false
+                  },
+                  "Characters": [
+                    {
+                        "Id": "BohaterB",
+                        "Attributes": {},
+                        "Characters": [],
+                        "Items": [
+                        ]
+                      }
+                  ],
+                  "Items": [
+                  ]
+                }
+                ]
+              }
+            ]
+          },
+          "RSide": {},
+          "Instructions": [
+            {
+              "Op": "move",
+              "Nodes": "BohaterB",
+              "To": "Somewhere/Characters"
+            }
+          ]
+    },
+    {
+        "Title": "Fight with one weapon ending with character’s death / Walka z jedną bronią zakończona śmiercią uczestnika",
+        "TitleGeneric": "Fight ending with character’s death / Walka zakończona śmiercią uczestnika",
+        "Description": "«CharacterA» posiadający broń («AnyWeapon») i bezbronny «CharacterB» podejmuje walkę, w której «CharacterB» ginie.",
+        "Override": 0,
+        "LSide": {
+          "Locations": [
+            {
+              "Id": "Somewhere",
+              "Attributes": {},
+              "Characters": [
+                {
+                  "Id": "CharacterA",
+                  "IsObject": true,
+                  "Attributes": {
+                    "HP": null
+                  },
+                  "Items": [
+                    {
+                      "Id": "AnyWeapon",
+                      "Attributes": {
+                        "IsWeapon": true,
+                        "Value": null
+                      }
+                    }
+                  ]
+                },
+                {
+                  "Id": "CharacterB",
+                  "IsObject": true,
+                  "Attributes": {
+                    "HP": null
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+              ],
+              "Items": [],
+              "Connections": []
+            }
+          ]
+        },
+        "RSide": {},
+        "Preconditions": [
+          {
+            "Cond": "CharacterA.HP*10 >= CharacterB.HP"
+          }
+    
+        ],
+        "Instructions": [
+          {
+            "Op": "set",
+            "Attribute": "CharacterB.IsDead",
+            "Value": true
+          },
+          {
+            "Op": "set",
+            "Attribute": "CharacterA.HP",
+            "Expr": "CharacterA.HP - max(0,CharacterB.HP - AnyWeapon.Value) / 5 "
+          },
+          {
+            "Op": "move",
+            "Nodes": "CharacterB/Items/*",
+            "To": "Somewhere/Items"
+          }
+        ]
+      }
+]

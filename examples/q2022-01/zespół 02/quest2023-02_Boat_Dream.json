@@ -1,0 +1,191 @@
+[
+  {
+    "Title": "Saving Peasant / Uratowanie chłopa",
+    "TitleGeneric": "Pulling character out / Wyciągnięcie postaci",
+    "Description": "Main_hero wyciąga chłopa ze skrzyni. Chłop jest mu wdzięczny.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Somewhere",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Chest",
+              "Attributes": {
+                "IsClosed": false
+              },
+              "Characters": [
+                {
+                  "Name": "Peasant",
+                  "Attributes": {},
+                  "Items": []
+                }
+              ],
+              "Items": []
+            }
+          ]
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Peasant",
+        "To": "Somewhere/Characters"
+      },
+      {
+        "Op": "delete",
+        "Nodes": "Main_hero/**/Items/Keys"
+      },
+      {
+        "Op": "delete",
+        "Nodes": "Main_hero/**/Narration/Keys_usage_information"
+      },
+      {
+        "Op": "create",
+        "In": "Main_hero/Narration",
+        "Sheaf": {
+          "Name": "Peasants_gratitude",
+          "Attributes": {
+            "Knowledge": "Chłop jest ci wdzięczny za uratowanie go ze skrzyni",
+            "Level": 1
+          }
+        }
+      }
+    ]
+  },
+  {
+    "Title": "Arson hut / Podpalenie chaty czarodzieja",
+    "TitleGeneric": "Arson location / Podpalenie lokacji",
+    "Description": "Zdesperowany Main_hero nie ma jak pokonać czarodzieja. Jego jedyną szansą jest podpalenie chaty, w której znajduje się Czarodziej. Wraz ze spaleniem chaty ginie jej właściciel, ale również cenny eliksir czarodzieja. W chacie znajduje się cenna metalowa skrzynia, na której zależy bohaterowi. Całe szczęście jest ona odporna na wszelki ogień.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Wizards_hut",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": [
+                {
+                  "Name": "Torch",
+                  "Attributes": {
+                    "IsLit": true
+                  }
+                }
+              ]
+            },
+            {
+              "Name": "Wizard",
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            }
+          ],
+          "Items": [],
+          "Connections": [
+            {
+              "Destination": "Nereby"
+            }
+          ]
+        },
+        {
+          "Id": "Nereby"
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Main_hero",
+        "To": "Nereby/Characters"
+      },
+      {
+        "Op": "delete",
+        "Nodes": "Wizards_hut/**/Items/Elixir"
+      },
+      {
+        "Op": "set",
+        "Attribute": "Wizard.IsDead",
+        "Value": true
+      }
+    ]
+  },
+  {
+    "Title": "Sword acquisition from Peasant when he owes us a favor / Przejęcie miecza od chłopa winnego nam przysługę",
+    "TitleGeneric": "Item acquisition from another character / Przejęcie przedmiotu od innej postaci",
+    "Description": "Przejmujemy miecz od uratowanego przez nas chłopa, gdy poziom wdzięczności chłopa jest większy niż 0.",
+    "Override": 2,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Somewhere",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": [],
+              "Narration": [
+                {
+                  "Name": "Peasants_gratitude",
+                  "Attributes": {
+                    "Level": null
+                  }
+                }
+              ]
+            },
+            {
+              "Name": "Peasant",
+              "Attributes": {},
+              "Characters": [],
+              "Items": [
+                {
+                  "Name": "Sword",
+                  "Attributes": {},
+                  "Characters": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "Preconditions": [
+      {
+        "Cond": "Peasants_gratitude.Level >= 1"
+      }
+    ],
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Sword",
+        "To": "Main_hero/Items"
+      },
+      {
+        "Op": "set",
+        "Attribute": "Peasants_gratitude.Level",
+        "Expr": "Peasants_gratitude.Level - 1"
+      }
+    ]
+  }
+]

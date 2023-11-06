@@ -1,0 +1,257 @@
+[
+  {
+    "Title": "Exchanging keys for knowledge / Wymiana kluczy na wiedzę",
+    "TitleGeneric": "",
+    "Description": "«BohaterA», który posiada klucze, i «BohaterB», który posiada pewną wiedzę Captains_whereabouts, wymieniają się kluczami za wiedzę.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Somewhere",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Id": "BohaterA",
+              "IsObject": true,
+              "Attributes": {},
+              "Items": [
+                {
+                  "Name": "Keys",
+                  "Attributes": {}
+                }
+              ]
+            },
+            {
+              "Id": "BohaterB",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": [],
+              "Narration": [
+                {
+                  "Name": "Captains_whereabouts",
+                  "Attributes": {
+                    "Knowledge": "Captain is locked in prison."
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+              ]
+            }
+          ],
+          "Items": [],
+          "Connections": []
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [],
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Keys",
+        "To": "BohaterB/Items"
+      },
+      {
+        "Op": "copy",
+        "Nodes": "Captains_whereabouts",
+        "To": "BohaterA/Narration"
+      }
+    ]
+  },
+  {
+    "Title": "Entering cave / Wejście do jaskini",
+    "TitleGeneric": "Location change / Zmiana lokacji",
+    "Description": "«Bohater» przedostaje się do jaskini.",
+    "Override": 1,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Lokacja_A",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Id": "Bohater",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            }
+          ],
+          "Items": [],
+          "Connections": [
+            {
+              "Destination": "Cave"
+            }
+          ]
+        },
+        {
+          "Name": "Cave"
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [
+      {
+        "Cond": "Cave.IsClosed == False"
+      }
+    ],
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Bohater",
+        "To": "Cave/Characters"
+      }
+    ]
+  },
+  {
+    "Title": "Excavating the entrance with tool / Odkopywanie wejścia narzędziem",
+    "TitleGeneric": "",
+    "Description": "Jaskinia zostaje odkopana narzędziem «Tool» przez postać «Bohater».",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Lokacja_A",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Id": "Bohater",
+              "Attributes": {},
+              "IsObject": true,
+              "Characters": [],
+              "Items": [
+                {
+                  "Id": "Tool",
+                  "Attributes": {
+                    "CanExcavate": true
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+              ]
+            }
+          ],
+          "Items": [],
+          "Connections": [
+            {
+              "Destination": "Cave"
+            }
+          ]
+        },
+        {
+          "Name": "Cave"
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [
+      {
+        "Cond": "Cave.IsClosed == True"
+      }
+    ],
+    "Instructions": [
+      {
+        "Op": "set",
+        "Attribute": "Cave.IsClosed",
+        "Value": false
+      },
+      {
+        "Op": "delete",
+        "Nodes": "Tool"
+      }
+    ]
+  },
+  {
+    "Title": "Excavating the entrance / Odkopywanie wejścia",
+    "TitleGeneric": "",
+    "Description": "Wejście do jaskini jest odkopywane przez postać «Bohater».",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Lokacja_A",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Id": "Bohater",
+              "Attributes": {},
+              "IsObject": true,
+              "Characters": [],
+              "Items": []
+            }
+          ],
+          "Items": [],
+          "Connections": [
+            {
+              "Destination": "Cave"
+            }
+          ]
+        },
+        {
+          "Name": "Cave"
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [
+      {
+        "Cond": "Cave.IsClosed == True"
+      }
+    ],
+    "Instructions": [
+      {
+        "Op": "set",
+        "Attribute": "Cave.IsClosed",
+        "Value": false
+      },
+      {
+        "Op": "set",
+        "Attribute": "Bohater.HP",
+        "Expr": "Bohater.HP - 20"
+      }
+    ]
+  },
+  {
+    "Title": "Overwhelming Guard with keys / Przejęcie kontroli nad Strażnikiem posiadającym klucze",
+    "TitleGeneric": "Overwhelming character / Przejęcie kontroli nad postacią",
+    "Description": "Bohater przejmuje kontrolę nad strażnikiem posiadającym klucze.",
+    "Override": 1,
+    "LSide": {
+      "Locations": [
+        {
+          "Name": "Cave",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Name": "Main_hero",
+              "IsObject": true
+            },
+            {
+              "Name": "Guard",
+              "Items": [
+                {
+                  "Name": "Keys",
+                  "Attributes": {}
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "RSide": {},
+    "Preconditions": [
+      {
+        "Cond": "Guard.HP >= 30"
+      }
+    ],
+    "Instructions": [
+      {
+        "Op": "move",
+        "Nodes": "Guard",
+        "To": "Main_hero/Characters"
+      }
+    ]
+  }
+]

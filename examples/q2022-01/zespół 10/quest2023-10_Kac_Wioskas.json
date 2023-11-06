@@ -1,0 +1,392 @@
+[
+	{
+		"Title": "The beginning of an intoxicating night in the inn / Rozpoczęcie upojnej nocy w karczmie",
+		"TitleGeneric": "Teleportation / Teleportacja",
+		"Description": "Karczmarz zachęca cię do picia i tak po kieliszku pijesz i pijesz. Aż w końcu film się urywa. Budzisz się... w stodole, a obok widzisz skrzynię.",
+		"Override": 0,
+		"LSide": {
+			"Locations": [
+				{
+					"Name": "Inn",
+					"Characters": [
+						{
+							"Name": "Main_hero",
+							"IsObject": true,
+							"Attributes": {}
+						},
+						{
+							"Name": "Innkeeper"
+						}
+					],
+					"Items": []
+				},
+				{
+					"Name": "Barn"
+				},
+				{
+					"Name": "Wizards_hut",
+					"Characters": [{ "Name": "Wizard", "Narration": [] }]
+				},
+				{
+					"Name": "Market"
+				}
+			]
+		},
+		"RSide": {},
+		"Instructions": [
+			{
+				"Op": "move",
+				"Nodes": "Main_hero",
+				"To": "Barn/Characters"
+			},
+			{
+				"Op": "create",
+				"In": "Main_hero/Narration",
+				"Sheaf": {
+					"Name": "Flashbacks_from_yesterday",
+					"Attributes": {
+						"Knowledge": "Pamiętasz urywki z poprzedniej nocy. Pamiętasz tylko, że zamieszany w to był Czarodziej...",
+						"Level": 1
+					}
+				}
+			},
+			{
+				"Op": "create",
+				"In": "Barn/Items",
+				"Sheaf": {
+					"Name": "Chest",
+					"Items": [
+						{
+							"Name": "Egg",
+							"Attributes": {
+								"IsChild": true
+							}
+						}
+					]
+				}
+			},
+			{
+				"Op": "create",
+				"In": "Market/Characters",
+				"Sheaf": {
+					"Name": "Common_woman",
+					"Narration": [
+						{
+							"Name": "Macabre_discovery",
+							"Attributes": {
+								"Knowledge": "Baronowi urodziło się dziecko w postaci jajka. Zeszłej nocy ktoś je porwał. Baron wyznaczył sporą nagrodę za znalezienie porywacza. Mogą być w to zamieszani biedacy z okolicznej chatki, którzy bardzo chcieli mieć dziecko."
+							}
+						}
+					]
+				}
+			},
+			{
+				"Op": "create",
+				"In": "Wizard/Narration",
+				"Sheaf": {
+					"Name": "Wizards_motivation",
+					"Attributes": {
+						"Knowledge": "Drwal wycina wszystkie drzewa w okolicy chatki Czarodzieja. Zachowanie drwala jest zagrożeniem dla pobliskich zwierząt roślin i samego czarodzieja. Czarodziej próbował z nim rozmawiać jednak nie pozostaje nic innego jak fizyczna konfrontacja, do której Czarodziej jest zbyt słaby. Nie pozostaje mu nic innego jak stworzyć własnego posłusznego wilka, który pokona drwala. Do tego potrzebne jest magiczne jajo i skóra wilka."
+					}
+				}
+			},
+			{
+				"Op": "create",
+				"In": "Market/Characters",
+				"Sheaf": {
+					"Name": "Common_man"
+				}
+			}
+		]
+	},
+	{
+		"Title": "Argument between hero and wizard / Kłótnia bohatera z czarodziejem",
+		"TitleGeneric": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
+		"Description": "Kłótnia bohatera z czarodziejem o wydarzenia z poprzedniej nocy, podczas której bohater zdobywa wiedzę o motywach czarodzieja.",
+		"Override": 0,
+		"LSide": {
+			"Locations": [
+				{
+					"Name": "Wizards_hut",
+					"Characters": [
+						{
+							"Name": "Wizard",
+							"IsObject": true,
+							"Narration": [
+								{
+									"Name": "Wizards_motivation",
+									"Attributes": {
+										"Knowledge": null
+									}
+								}
+							]
+						},
+						{
+							"Name": "Main_hero",
+							"IsObject": true,
+							"Narration": [
+								{
+									"Name": "Flashbacks_from_yesterday"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		"RSide": {},
+		"Preconditions": [],
+		"Instructions": [
+			{
+				"Op": "copy",
+				"To": "Main_hero/Narration",
+				"Nodes": "Wizards_motivation"
+			},
+			{
+				"Op": "delete",
+				"Nodes": "Flashbacks_from_yesterday"
+			}
+		]
+	},
+	{
+		"Title": "Eavesdropping on the lively discussion of people at the market / Podsłuchanie żywej dyskusji ludzi na rynku",
+		"TitleGeneric": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
+		"Description": "Bohater podsłuchuje dyskusję «CharacterA» i  «CharacterB» o straszliwej nowinie na rynku.",
+		"Override": 0,
+		"LSide": {
+			"Locations": [
+				{
+					"Name": "Market",
+					"Characters": [
+						{
+							"Name": "Main_hero",
+							"IsObject": true
+						},
+						{
+							"Id":"CharacterA",
+							"IsObject": true,
+							"Narration": [
+								{
+									"Name": "Macabre_discovery",
+									"Attributes": {
+										"Knowledge": null
+									}
+								}
+							]
+						},
+						{
+							"Id":"CharacterB"
+						}
+					]
+				}
+			]
+		},
+		"RSide": {},
+		"Preconditions": [],
+		"Instructions": [
+			{
+				"Op": "copy",
+				"To": "Main_hero/Narration",
+				"Nodes": "Macabre_discovery"
+			},
+			{
+				"Op": "copy",
+				"To": "CharacterB/Narration",
+				"Nodes": "Macabre_discovery"
+			}
+		]
+	},
+	{
+		"Title": "Spawning a helping wolf from an egg / Wyczarowanie pomocnego wilka z jajka",
+		"TitleGeneric": "Creating an item using knowledge / Stworzenie przedmiotu z wiedzy fabularnej",
+		"Description": "Wkładasz jajko w skórę wilka i powstaje towarzysz.",
+		"Override": 0,
+		"LSide": {
+			"Locations": [
+				{
+					"Id": "Anywhere",
+					"Characters": [
+						{
+							"Name": "Main_hero",
+							"IsObject": true,
+							"Items": [
+								{
+									"Name": "Wolf_pelt",
+									"Items": [
+										{
+											"Name": "Egg",
+											"Attributes": {
+												"IsChild": true
+											}
+										}
+									]
+								}
+							],
+
+							"Narration": [
+								{
+									"Name": "Wizards_motivation"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		"RSide": {},
+		"Instructions": [
+			{
+				"Op": "create",
+				"In": "Main_hero/Characters",
+				"Sheaf": {
+					"Name": "Wolf",
+					"Attributes": {
+						"HP": 300
+					}
+				}
+			},
+			{
+				"Op": "delete",
+				"Nodes": "Wolf_pelt"
+			}
+		]
+	},
+	{
+		"Title": "Giving an egg-child to a poor family / Oddanie jajko-dziecka biednej rodzinie",
+		"TitleGeneric": "Item acquisition from another character / Przejęcie przedmiotu od innej postaci",
+		"Description": "Bohater udaje się do pobliskiej bezdzietnej biedoty. Oddaje im dziecko a w ramach wdzięczności zostaje obdarowany kompasem, który należał do chłopa w czasie, gdy był jeszcze kapitanem statku.",
+		"Override": 0,
+		"LSide": {
+			"Locations": [
+				{
+					"Name": "Peasants_hut",
+					"Attributes": {},
+					"Characters": [
+						{
+							"Name": "Main_hero",
+							"IsObject": true,
+							"Narration": [
+								{
+									"Name": "Macabre_discovery",
+									"Attributes": {
+										"Knowledge": null
+									}
+								}
+							],
+							"Items": [
+								{
+									"Name": "Egg",
+									"Attributes": {
+										"IsChild": true
+									}
+								}
+							]
+						},
+						{
+							"Name": "Peasant"
+						}
+					]
+				}
+			]
+		},
+		"RSide": {},
+		"Preconditions": [],
+		"Instructions": [
+			{
+				"Op": "create",
+				"In": "Main_hero/Items",
+				"Sheaf": {
+					"Name": "Compass"
+				}
+			},
+			{
+				"Op": "move",
+				"Nodes": "Main_hero/Items/Egg",
+				"To": "Peasant/Items"
+			}
+		]
+	},
+	{
+		"Title": "Fight wolf and hero vs mighty lumberjack / Walka wilk i bohater kontra potężny drwal",
+		"TitleGeneric": "Group fight ending with character’s death / Walka grupowa zakończona śmiercią uczestnika",
+		"Description": "Bohater toczy zaciętą walkę z drwalem, w której pomaga mu jego wierny wilk.",
+		"Override": 0,
+		"LSide": {
+			"Locations": [
+				{
+					"Name": "Lumberjacks_hut",
+					"Attributes": {},
+					"Items": [],
+					"Characters": [
+						{
+							"Name": "Main_hero",
+							"IsObject": true,
+							"Attributes": {
+								"HP": null
+							},
+							"Characters": [
+								{
+									"Name": "Wolf",
+									"Attributes": {
+										"HP": null
+									}
+								}
+							]
+						},
+						{
+							"Name": "Lumberjack",
+							"IsObject": true,
+							"Attributes": {
+								"HP": null
+							}
+						}
+					]
+				}
+			]
+		},
+		"RSide": {},
+		"Preconditions": [
+			{
+				"Cond": "Main_hero.HP + Wolf.HP > Lumberjack.HP"
+			}
+		],
+		"Instructions": [
+			{
+				"Op": "set",
+				"Attribute": "Lumberjack.IsDead",
+				"Value": true
+			},
+			{
+				"Op": "set",
+				"Attribute": "Main_hero.HP",
+				"Expr": "Main_hero.HP - Lumberjack.HP / 4"
+			},
+			{
+				"Op": "set",
+				"Attribute": "Wolf.HP",
+				"Expr": "Wolf.HP - Lumberjack.HP / 4"
+			},
+			{
+				"Op": "create",
+				"In": "Lumberjacks_hut/Items",
+				"Sheaf": {
+					"Name": "Wood"
+				}
+			},
+			{
+				"Op": "create",
+				"In": "Lumberjacks_hut/Items",
+				"Sheaf": {
+					"Name": "Compass"
+				}
+			},
+			{
+				"Op": "create",
+				"In": "Lumberjacks_hut/Items",
+				"Sheaf": {
+					"Name": "Axe"
+				}
+			}
+		]
+	}
+]

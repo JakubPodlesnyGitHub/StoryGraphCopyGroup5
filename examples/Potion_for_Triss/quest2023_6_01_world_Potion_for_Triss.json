@@ -1,0 +1,94 @@
+[
+    {
+        "Title": "Potion for Triss World / Świat misji Mikstura dla Triss",
+        "TitleGeneric": "",
+        "Description": "Swiat, w którym może wydarzyć się misja Mikstura dla Triss.",
+        "Override": 0,
+        "LSide": {
+            "Locations": [
+                {
+                    "Name": "Main_hall",
+                    "Characters": [
+                        {
+                            "Name": "Main_hero",
+                            "Items": [
+                                {
+                                    "Name": "Sword",
+                                    "Attributes": {
+                                        "Value": 1000
+                                    }
+                                }
+                            ],
+                            "Narration": [
+                                {
+                                    "Name": "Triss_wounded",
+                                    "Attributes": {
+                                        "Knowledge": "Tirss została ranna w ataku, umrze, jeśli jej nie pomożemy."
+                                    }
+                                }
+                            ],
+                            "Attributes": {
+                                "HP": 100,
+                                "Money": 10
+                            }
+
+                        },
+                        {
+                            "Name": "Lambert",
+                            "Items": [
+                                {
+                                    "Name": "Sword",
+                                    "Attributes": {
+                                        "Value": 1000
+                                    }
+                                }
+                            ],
+                            "Narration": [
+                                {
+                                    "Name": "Shopping_list",
+                                    "Attributes": {
+                                        "Knowledge": "Do sporządzenia mikstury dla Triss potrzebujesz White Gull i Calcium equum"
+                                    }
+                                }
+                            ],
+                            "Attributes": {
+                                "HP": 100,
+                                "Money": 10
+                            }
+
+                        }
+                    ],
+                    "Connections": [
+                        {
+                            "Destination": "Armory"
+                        }
+                    ]
+                },
+                {
+
+                    "Name": "Armory",
+                    "Attributes": {
+
+                    },
+
+                    "Items": [
+                        {
+                            "Name": "White_seagull",
+                            "Attributes": {
+                                "Value": 10,
+                                "NutritionalValue": 1000
+                            }
+                        }
+                    ],
+                    "Connections": [
+                        {
+                            "Destination": "Main_hall"
+                        }
+                    ]
+                }
+            ]
+        },
+        "RSide": {},
+        "Instructions": []
+    }
+]

@@ -1,0 +1,712 @@
+[
+  {
+    "Title": "World_q0 / Świat_q0",
+    "TitleGeneric": "",
+    "Description": "Swiat, w którym może wydarzyć się misja Fogstrand.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Main_road_1",
+          "Name": "Main_road",
+          "Characters": [
+            {
+              "Name": "Cleric_orvelle",
+              "Items": [
+                {
+                  "Name": "Waterskin",
+                  "Attributes": {
+                    "Value": 20
+                  }
+                },
+                {
+                  "Name": "Broom",
+                  "Attributes": {
+                    "Value": 100
+                  }
+                },
+                {
+                  "Name": "Tent",
+                  "Attributes": {
+                    "Value": 100
+                  }
+                },
+                {
+                  "Name": "Food_rations",
+                  "Attributes": {
+                    "Value": 20,
+                    "NutritionalValue": 10
+                  }
+                },
+                {
+                  "Name": "Torch",
+                  "Attributes": {
+                    "Value": 20
+                  }
+                },
+                {
+                  "Name": "Mage_package",
+                  "Attributes": {
+                    "Value": 1000
+                  }
+                },
+                {
+                  "Name": "Shield",
+                  "Attributes": {
+                    "Value": 100,
+                    "IsWeapon": true
+                  }
+                },
+                {
+                  "Name": "Buzdygan",
+                  "Attributes": {
+                    "Value": 150,
+                    "IsWeapon": true
+                  }
+                },
+                {
+                  "Name": "Steel_glove",
+                  "Attributes": {
+                    "Value": 300,
+                    "IsWeapon": true
+                  }
+                }
+              ],
+              "Attributes": {
+                "HP": 100,
+                "Money": 10
+              }
+            },
+            {
+              "Name": "Ranger_sylmare_urilamin",
+              "Items": [
+                {
+                  "Name": "Waterskin",
+                  "Attributes": {
+                    "Value": 20
+                  }
+                },
+                {
+                  "Name": "Broom",
+                  "Attributes": {
+                    "Value": 100
+                  }
+                },
+                {
+                  "Name": "Rope",
+                  "Attributes": {
+                    "Value": 50
+                  }
+                },
+                {
+                  "Name": "Food_rations",
+                  "Attributes": {
+                    "Value": 20,
+                    "NutritionalValue": 10
+                  }
+                },
+                {
+                  "Name": "Torch",
+                  "Attributes": {
+                    "Value": 20
+                  }
+                },
+                {
+                  "Name": "Shortbow",
+                  "Attributes": {
+                    "Value": 100,
+                    "IsWeapon": true
+                  }
+                },
+                {
+                  "Name": "Dagger",
+                  "Attributes": {
+                    "Value": 50,
+                    "IsWeapon": true
+                  }
+                },
+                {
+                  "Name": "Leather_armor",
+                  "Attributes": {
+                    "Value": 30
+                  }
+                }
+              ],
+              "Attributes": {
+                "HP": 100,
+                "Money": 10
+              }
+            },
+            {
+              "Name": "Fighter_wald_stagstone",
+              "Items": [
+                {
+                  "Name": "Waterskin",
+                  "Attributes": {
+                    "Value": 20
+                  }
+                },
+                {
+                  "Name": "Broom",
+                  "Attributes": {
+                    "Value": 100
+                  }
+                },
+                {
+                  "Name": "Food_rations",
+                  "Attributes": {
+                    "Value": 20,
+                    "NutritionalValue": 10
+                  }
+                },
+                {
+                  "Name": "Torch",
+                  "Attributes": {
+                    "Value": 20
+                  }
+                },
+                {
+                  "Name": "Shortsword",
+                  "Attributes": {
+                    "Value": 150,
+                    "IsWeapon": true
+                  }
+                },
+                {
+                  "Name": "Shield",
+                  "Attributes": {
+                    "Value": 100,
+                    "IsWeapon": true
+                  }
+                }
+              ],
+              "Attributes": {
+                "HP": 100,
+                "Money": 10
+              }
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Fogstrand_crossroad"
+            }
+          ]
+        },
+        {
+          "Name": "Fogstrand_crossroad",
+          "Characters": [
+          ],
+          "Connections": [
+            {
+              "Destination": "Main_road_2"
+            },
+            {
+              "Destination": "Camp"
+            },
+            {
+              "Destination": "Caravan"
+            }
+          ]
+        },
+        {
+          "Id": "Main_road_2",
+          "Name": "Main_road",
+          "Characters": [
+          ],
+          "Connections": [
+            {
+              "Destination": "Fogstrand_village"
+            }
+          ]
+        },
+        {
+          "Name": "Camp",
+          "Characters": [
+            {
+              "Name": "Goblin",
+              "Items": [
+                {
+                  "Name": "Scimitar",
+                  "Attributes": {
+                    "IsWeapon": true
+                  }
+                }
+              ],
+              "Attributes": {
+                "HP": 20,
+                "Money": 10
+              }
+            },
+            {
+              "Name": "Goblin",
+              "Items": [
+                {
+                  "Name": "Scimitar",
+                  "Attributes": {
+                    "IsWeapon": true
+                  }
+                }
+              ],
+              "Attributes": {
+                "HP": 20,
+                "Money": 10
+              }
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Fogstrand_village"
+            }
+          ]
+        },
+        {
+          "Name": "Caravan",
+          "Characters": [
+          ],
+          "Items": [
+            {
+              "Name": "Letter_to_mayor",
+              "Attributes": {
+                "Value": 10
+              }
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Fogstrand_village"
+            }
+          ]
+        },
+        {
+          "Name": "Fogstrand_village",
+          "Characters": [
+          ],
+          "Connections": [
+            {
+              "Destination": "Caravan"
+            },
+            {
+              "Destination": "Fogstrand_village_surroundings"
+            },
+            {
+              "Destination": "Fogstrand_village_inn"
+            },
+            {
+              "Destination": "Fogstrand_village_shop"
+            },
+            {
+              "Destination": "Fogstrand_village_mayor_house"
+            },
+            {
+              "Destination": "Fogstrand_village_chapel"
+            },
+            {
+              "Destination": "Waeldstone_forest"
+            }
+          ]
+        },
+        {
+          "Name": "Fogstrand_village_surroundings",
+          "Characters": [
+          ],
+          "Connections": [
+            {
+              "Destination": "Fogstrand_village"
+            }
+          ]
+        },
+        {
+          "Name": "Fogstrand_village_inn",
+          "Characters": [
+            {
+              "Name": "Innkeeper_mosk",
+              "Items": [
+                {
+                  "Name": "Food_rations",
+                  "Attributes": {
+                    "Value": 20,
+                    "Quantity": 99,
+                    "NutritionalValue": 10
+                  }
+                }
+              ],
+              "Attributes": {
+                "HP": 100,
+                "Money": 200
+              }
+            },
+            {
+              "Name": "Drunkard",
+              "Items": [
+              ],
+              "Attributes": {
+                "HP": 50,
+                "Money": 5
+              }
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Fogstrand_crossroad"
+            }
+          ]
+        },
+        {
+          "Name": "Fogstrand_village_shop",
+          "Characters": [
+            {
+              "Name": "Merchant",
+              "Items": [
+                {
+                  "Name": "Hp_pot",
+                  "Attributes": {
+                    "Value": 100,
+                    "Quantity": 5,
+                    "NutritionalValue": 20
+                  }
+                },
+                {
+                  "Name": "Torch",
+                  "Attributes": {
+                    "Value": 20
+                  }
+                },
+                {
+                  "Name": "Rope",
+                  "Attributes": {
+                    "Value": 50
+                  }
+                },
+                {
+                  "Name": "Waterskin",
+                  "Attributes": {
+                    "Value": 20
+                  }
+                },
+                {
+                  "Name": "Broom",
+                  "Attributes": {
+                    "Value": 100
+                  }
+                },
+                {
+                  "Name": "Tent",
+                  "Attributes": {
+                    "Value": 100
+                  }
+                },
+                {
+                  "Name": "Powder_keg",
+                  "Attributes": {
+                    "Value": 200
+                  }
+                },
+                {
+                  "Name": "Flint",
+                  "Attributes": {
+                    "Value": 20
+                  }
+                }
+              ],
+              "Attributes": {
+                "HP": 100
+              }
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Fogstrand_crossroad"
+            }
+          ]
+        },
+        {
+          "Name": "Fogstrand_village_mayor_house",
+          "Characters": [
+            {
+              "Name": "Mayor_Halar",
+              "Items": [
+              ],
+              "Attributes": {
+                "HP": 100
+              }
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Fogstrand_crossroad"
+            }
+          ]
+        },
+        {
+          "Name": "Fogstrand_village_chapel",
+          "Characters": [
+            {
+              "Name": "Nun_Tusrill",
+              "Items": [
+              ],
+              "Attributes": {
+                "HP": 100
+              }
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Fogstrand_crossroad"
+            }
+          ]
+        },
+        {
+          "Name": "Waeldstone_forest",
+          "Characters": [
+          ],
+          "Connections": [
+            {
+              "Destination": "Vegdorth_cave_entranc"
+            },
+            {
+              "Destination": "Fogstrand_village"
+            }
+          ]
+        },
+        {
+          "Name": "Vegdorth_cave_entranc",
+          "Characters": [
+          ],
+          "Connections": [
+            {
+              "Destination": "Waeldstone_forest"
+            },
+            {
+              "Destination": "Vegdorth_cave_vestibule"
+            }
+          ]
+        },
+        {
+          "Name": "Vegdorth_cave_vestibule",
+          "Characters": [
+            {
+              "Name": "Goblin",
+              "Items": [
+                {
+                  "Name": "Scimitar",
+                  "Attributes": {
+                    "IsWeapon": true
+                  }
+                }
+              ],
+              "Attributes": {
+                "HP": 20,
+                "Money": 10
+              }
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Vegdorth_cave_entranc"
+            },
+            {
+              "Destination": "Vegdorth_cave_chamber_2"
+            },
+            {
+              "Destination": "Vegdorth_cave_dam"
+            },
+            {
+              "Destination": "Vegdorth_cave_small_chamber"
+            }
+          ]
+        },
+        {
+          "Id": "Vegdorth_cave_chamber_1",
+          "Name": "Vegdorth_cave_chamber",
+          "Characters": [
+            {
+              "Name": "Goblin",
+              "Items": [
+                {
+                  "Name": "Scimitar",
+                  "Attributes": {
+                    "IsWeapon": true
+                  }
+                }
+              ],
+              "Attributes": {
+                "HP": 20,
+                "Money": 10
+              }
+            },
+            {
+              "Name": "Goblin",
+              "Items": [
+                {
+                  "Name": "Scimitar",
+                  "Attributes": {
+                    "IsWeapon": true
+                  }
+                }
+              ],
+              "Attributes": {
+                "HP": 20,
+                "Money": 10
+              }
+            },
+            {
+              "Name": "Goblin",
+              "Items": [
+                {
+                  "Name": "Scimitar",
+                  "Attributes": {
+                    "IsWeapon": true
+                  }
+                }
+              ],
+              "Attributes": {
+                "HP": 20,
+                "Money": 10
+              }
+            },
+            {
+              "Name": "Latbec_warchief",
+              "Items": [
+                {
+                  "Name": "Scimitar",
+                  "Attributes": {
+                    "IsWeapon": true
+                  }
+                }
+              ],
+              "Attributes": {
+                "HP": 200,
+                "Money": 100
+              }
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Vegdorth_cave_dam"
+            },
+            {
+              "Destination": "Vegdorth_cave_small_chamber"
+            }
+          ]
+        },
+        {
+          "Name": "Vegdorth_cave_small_chamber",
+          "Characters": [
+            {
+              "Name": "Wolf",
+              "Attributes": {
+                "HP": 35
+              }
+            },
+            {
+              "Name": "Wolf",
+              "Attributes": {
+                "HP": 35
+              }
+            },
+            {
+              "Name": "Wolf",
+              "Attributes": {
+                "HP": 35
+              }
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Vegdorth_cave_chamber_1"
+            },
+            {
+              "Destination": "Vegdorth_cave_vestibule"
+            }
+          ]
+        },
+        {
+          "Id": "Vegdorth_cave_chamber_2",
+          "Name": "Vegdorth_cave_chamber",
+          "Characters": [
+            {
+              "Name": "Goblin",
+              "Items": [
+                {
+                  "Name": "Scimitar",
+                  "Attributes": {
+                    "IsWeapon": true
+                  }
+                }
+              ],
+              "Attributes": {
+                "HP": 20,
+                "Money": 10
+              }
+            },
+            {
+              "Name": "Goblin",
+              "Items": [
+                {
+                  "Name": "Scimitar",
+                  "Attributes": {
+                    "IsWeapon": true
+                  }
+                }
+              ],
+              "Attributes": {
+                "HP": 20,
+                "Money": 10
+              }
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Vegdorth_cave_vestibule"
+            }
+          ]
+        },
+        {
+          "Name": "Vegdorth_cave_dam",
+          "Characters": [
+            {
+              "Name": "Goblin",
+              "Items": [
+                {
+                  "Name": "Scimitar",
+                  "Attributes": {
+                    "IsWeapon": true
+                  }
+                }
+              ],
+              "Attributes": {
+                "HP": 20,
+                "Money": 10
+              }
+            },
+            {
+              "Name": "Goblin",
+              "Items": [
+                {
+                  "Name": "Scimitar",
+                  "Attributes": {
+                    "IsWeapon": true
+                  }
+                }
+              ],
+              "Attributes": {
+                "HP": 20,
+                "Money": 10
+              }
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Vegdorth_cave_chamber_1"
+            },
+            {
+              "Destination": "Vegdorth_cave_vestibule"
+            }
+          ]
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": []
+  }
+]
