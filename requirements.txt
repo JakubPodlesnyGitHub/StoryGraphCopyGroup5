@@ -9,7 +9,7 @@ jsonschema==4.1.2
 Pillow==8.4.0
 pyrsistent==0.18.0
 raven==6.10.0
-requests==2.26.0
+requests==2.31.0
 svg.path==4.1
 urllib3==1.26.6
 anyio==3.6.1; python_version >= "3.7" and python_full_version >= "3.6.2"
@@ -38,7 +38,7 @@ pyrsistent==0.18.0; python_version >= "3.6"
 python-dotenv==0.20.0; python_version >= "3.7"
 pyyaml==6.0; python_version >= "3.7"
 raven==6.10.0
-requests==2.26.0; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.6.0")
+requests==2.31.0; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.6.0")
 sniffio==1.2.0; python_version >= "3.6" and python_full_version >= "3.6.2"
 starlette==0.19.1; python_version >= "3.6" and python_full_version >= "3.6.1"
 svg.path==4.1
