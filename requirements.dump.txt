@@ -2,7 +2,7 @@ attrs==21.2.0
 Automat==0.8.0
 azure-functions==1.7.2
 blinker==1.4
-certifi==2021.5.30
+certifi==2023.7.22
 chardet==3.0.4
 charset-normalizer==2.0.4
 Click==7.0
